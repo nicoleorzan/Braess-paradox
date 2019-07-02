@@ -19,6 +19,7 @@ int main(){
   
   double fR = 50;
   double wR = 2*M_PI*fR;
+  double h = 0.01;
   double *theta = (double*) malloc(nodes * (steps+1) * sizeof(double));
   double *omega = (double*) malloc(nodes * (steps+1) * sizeof(double)); 
   double *gamma = (double*) malloc(nodes * sizeof(double));
@@ -26,6 +27,7 @@ int main(){
   double *somma = (double*) malloc(nodes * sizeof(double));
   double *K = (double*) malloc(nodes * nodes * sizeof(double));
   double *P = (double*) malloc(nodes * sizeof(double));
+
  
   char fileout[80];
   FILE *out;
@@ -33,7 +35,7 @@ int main(){
   // variables initialization
   
   for (int i=0; i<nodes; i++){
-    gamma[i] = 0.1;
+    //gamma[i] = 0; //no control //0.1;
     alpha[i] = 0.1;
     theta[i] = 0;
     omega[i] = 0;
@@ -44,18 +46,18 @@ int main(){
   }
   P[0] = 1;
   P[1] = -1.2;
+  gamma[0] = 0;
+  gamma[1] = 0.1;
 
-  double h = 0.01;
-
-  print_mat(K, nodes, nodes);
-  
   // integration using euler's method
+  
   fprintf(stderr, "Output file name = ");
   scanf("%80s", fileout);
   out = fopen(fileout, "w");
-  fprintf(out,"#   t          omega0(t)        omega1(t)  \n");
-  fprintf(out, "%16.8d%16.8e%16.8e\n", 0, omega[0], omega[1]);
+  fprintf(out,"#   t          omega0(t)        omega1(t)         theta0(t)        theta1(t) \n");
+  fprintf(out, "%16.8d%16.8e%16.8e%16.8e%16.8e\n", 0, omega[0], omega[1], theta[0], theta[1]);
   
+
   for (int t=1; t<=steps; t++){   
       
     for (int i=0; i<nodes; i++){
@@ -68,8 +70,7 @@ int main(){
       omega[i+t*nodes] = omega[i+(t-1)*nodes] + h*(-alpha[i]*omega[i+(t-1)*nodes]- gamma[i]*theta[i+(t-1)*nodes] + P[i] - somma[i]);
       theta[i+t*nodes] = theta[i+(t-1)*nodes] + h*(omega[i+(t-1)*nodes]);
     }
-    //fprintf(stdout,"\n ");
-    fprintf(out, "%16.8d%16.8e%16.8e\n", t, omega[0+t*nodes], omega[1+t*nodes]);
+    fprintf(out,  "%16.8d%16.8e%16.8e%16.8e%16.8e\n", t, omega[0+t*nodes], omega[1+t*nodes], theta[0+t*nodes], theta[1+t*nodes]);
 
   }
   
@@ -79,5 +80,4 @@ int main(){
   free(theta);  free(gamma);  free(K);  free(P);  free(alpha);  free(omega); free(somma);
 
   return 0;
- 
 }
