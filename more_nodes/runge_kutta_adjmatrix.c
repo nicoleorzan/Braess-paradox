@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include <math.h>
 
-void print_mat(double *matrix, int N, int M){
+
+void print_mat(int *matrix, int N, int M){
   for (int i=0; i<N; i++){
       for (int j=0; j<M; j++){
-	fprintf(stdout, "%f ", matrix[i*M+j]);
+	fprintf(stdout, "%d ", matrix[i*M+j]);
       }
       fprintf(stdout, "\n");
   }  
 }
-
 
 double omega_funct(double omega_old, double alpha, double gamma, double theta, double P, double somma){
   return -alpha*omega_old - gamma*theta + P - somma;
@@ -29,39 +29,9 @@ int main(){
   double *gamma = (double*) malloc(nodes * sizeof(double));
   double *alpha = (double*) malloc(nodes * sizeof(double));
   double *somma = (double*) malloc(nodes * sizeof(double));
+  int *ADJ = (int*) malloc(nodes * nodes * sizeof(int));
+  double *K = (double*) malloc(nodes * nodes * sizeof(double));
   double *P = (double*) malloc(nodes * sizeof(double));
-  double *num_interactions = (double*) malloc(nodes * sizeof(double));
-
-  
-  // reading from file
- 
-  char fileout[80];
-  FILE *out, *AII, *AVV, *interact, *W;
-  int interactions[nodes], AI[nodes+1],  AV[20], weights[20];
-  interact = fopen("interactions.txt", "r");
-  AVV = fopen("AV.txt", "r");
-  AII = fopen("AI.txt", "r");
-  W = fopen("weights.txt", "r");
-
-  if (AII == NULL || AVV == NULL || interact == NULL){
-    printf("Error Reading File\n");
-    exit (0);
-  }
-  for (int i = 0; i < nodes; i++){
-    fscanf(interact, "%d,", &interactions[i] );
-  }
-  for (int i = 0; i < nodes+1; i++){
-    fscanf(AII, "%d,", &AI[i] );
-  }
-  for (int i = 0; i < 20; i++){
-    fscanf(AVV, "%d,", &AV[i] );
-    fscanf(W, "%d,", &weights[i] );
-  }
-
-  fclose(interact);
-  fclose(AVV);
-  fclose(AII);
-  fclose(W);
 
   
   // variables initialization
@@ -72,6 +42,9 @@ int main(){
     theta[i] = 0;
     omega[i] = 0;
     somma[i] = 0;
+    for (int j=0; j<nodes; j++){
+      K[i*nodes+j] = 1.03;
+    }
   }
   P[0] = -1; //consumers
   P[4] = -1;
@@ -81,24 +54,58 @@ int main(){
   P[3] = 1; //generators
   P[2] = 1;
   P[6] = 1;
-  P[1] = 1; 
+  P[1] = 1;
+
+  // adjacency matrix
+  
+  ADJ[0+1*nodes] = 1;
+  ADJ[0+6*nodes] = 1;
+  ADJ[0+5*nodes] = 1;
+  ADJ[1+0*nodes] = 1;
+  ADJ[1+2*nodes] = 1;
+  ADJ[2+1*nodes] = 1;
+  ADJ[2+6*nodes] = 1;
+  ADJ[2+3*nodes] = 1;
+  ADJ[3+2*nodes] = 1;
+  ADJ[3+4*nodes] = 1;
+  ADJ[3+7*nodes] = 1;
+  ADJ[4+3*nodes] = 1;
+  ADJ[4+5*nodes] = 1;
+  ADJ[5+4*nodes] = 1;
+  ADJ[5+7*nodes] = 1;
+  ADJ[5+0*nodes] = 1;
+  ADJ[6+0*nodes] = 1;
+  ADJ[6+2*nodes] = 1;
+  ADJ[7+3*nodes] = 1;
+  ADJ[7+5*nodes] = 1;
+
+  //adding line 2 - 4 to unstabilize network
+  
+  ADJ[1+3*nodes] = 1;
+  ADJ[3+1*nodes] = 1;
+
+  print_mat(ADJ, nodes, nodes);
 
   
-  // integration using runge-kutta method
-  fprintf(stderr, "Output file name = ");
-  scanf("%80s", fileout);
-  out = fopen(fileout, "w");
+  // integration using euler method
+  
+  FILE  *theta_doc;
 
+  theta_doc = fopen("theta", "w");
   
   double k1, k2, k3, k4;
 
-  for (int t=1; t<=steps; t++){   
-    fprintf(out, "%16.8f", t*h);
-    for (int i=0; i<nodes; i++){
+  for (int t=1; t<=steps; t++){
+    
+    fprintf(theta_doc, "%16.8f", t*h);
+    
+    for (int i=0; i<nodes; i++){  
 
       somma[i] = 0;
-      for (int j = AI[i]+1; j<=AI[i+1]; j++){
-	somma[i] +=  weights[j]*sin(theta[i+(t-1)*nodes] - theta[AV[j] +(t-1)*nodes]);
+      for (int j=0; j<nodes; j++){
+	if (ADJ[i+nodes*j]!=0){
+	somma[i] += 1.03 * sin(theta[i+(t-1)*nodes] - theta[j + (t-1)*nodes]); //weights[j]
+	}
       }
 
       k1 = omega_funct(omega[i+(t-1)*nodes], alpha[i], gamma[i], theta[i+(t-1)*nodes], P[i], somma[i]);
@@ -107,15 +114,16 @@ int main(){
       k4 = omega_funct(omega[i+(t-1)*nodes]+k3*h, alpha[i], gamma[i], theta[i+(t-1)*nodes], P[i], somma[i]);
       
       omega[i+t*nodes] = omega[i+(t-1)*nodes] + h/6*(k1+2*k2+2*k3+k4);
-      fprintf(out, "%16.8e", omega[i+t*nodes]);
       theta[i+t*nodes] = theta[i+(t-1)*nodes] + h*(omega[i+(t-1)*nodes]);
+
+      fprintf(theta_doc, "%16.8e", theta[i+t*nodes]/M_PI); 
     }
-    fprintf(out, "\n");
+    fprintf(theta_doc, "\n");
 
   }
   
-  fclose(out);
-  free(theta);  free(gamma);  free(P);  free(alpha);  free(omega); free(somma);
+  fclose(theta_doc);
+  free(theta);  free(gamma);  free(P);  free(alpha);  free(omega); free(somma);  free(K); free(ADJ);
   
   return 0;
 }
