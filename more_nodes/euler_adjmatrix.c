@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 
+# define nodes 8
 
 void print_mat(int *matrix, int N, int M){
   for (int i=0; i<N; i++){
@@ -14,7 +15,7 @@ void print_mat(int *matrix, int N, int M){
 
 int main(){
 
-  int nodes = 8;
+  //int nodes = 8;
   int steps = 2000;
   
   double fR = 50;
