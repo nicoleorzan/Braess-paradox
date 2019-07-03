@@ -19,8 +19,7 @@ double omega_funct(double omega_old, double alpha, double gamma, double theta, d
 
 int main(){
 
-  //int nodes = 8;
-  int steps = 2000;
+  int steps = 2500;
   
   double fR = 50;
   double wR = 2*M_PI*fR;
@@ -33,41 +32,47 @@ int main(){
   double *K = (double*) malloc(nodes * nodes * sizeof(double));
   double *P = (double*) malloc(nodes * sizeof(double));
   double *num_interactions = (double*) malloc(nodes * sizeof(double));
-
   
   // reading from file
  
-  FILE *AII, *AVV, *interact, *W;
-  int interactions[nodes], AI[nodes+1],  AV[20], weights[20];
-  interact = fopen("files_to_read/interactions.txt", "r");
+  FILE *AII, *AVV;
+  //FILE *interact, *W;
+  int AI[nodes+1],  AV[22];
+  //interactions[nodes],weights[20];
+  //interact = fopen("files_to_read/interactions.txt", "r");
   AVV = fopen("files_to_read/AV.txt", "r");
+  //AVV = fopen("files_to_read/AV_adding_line.txt", "r");
   AII = fopen("files_to_read/AI.txt", "r");
-  W = fopen("files_to_read/weights.txt", "r");
+  //AII = fopen("files_to_read/AI_adding_line.txt", "r");
+  //W = fopen("files_to_read/weights.txt", "r");
 
-  if (AII == NULL || AVV == NULL || interact == NULL){
+  if (AII == NULL || AVV == NULL){
     printf("Error Reading File\n");
     exit (0);
   }
-  for (int i = 0; i < nodes; i++){
+  /*for (int i = 0; i < nodes; i++){
     fscanf(interact, "%d,", &interactions[i] );
   }
+  for (int i = 0; i < 20; i++){
+    fscanf(W, "%d,", &weights[i] );
+  }*/
   for (int i = 0; i < nodes+1; i++){
     fscanf(AII, "%d,", &AI[i] );
   }
-  for (int i = 0; i < 20; i++){
+  for (int i = 0; i < 22; i++){
     fscanf(AVV, "%d,", &AV[i] );
-    fscanf(W, "%d,", &weights[i] );
   }
-  fclose(interact);
+  
+  //fclose(interact);
   fclose(AVV);
   fclose(AII);
-  fclose(W);
+  //fclose(W);
 
   
   // variables initialization
   
   for (int i=0; i<nodes; i++){
-    gamma[i] = 0;
+    gamma[i] = 0.1;
     alpha[i] = 1;
     theta[i] = 0;
     omega[i] = 0;
@@ -93,13 +98,13 @@ int main(){
   
   theta_doc = fopen("theta", "w");
   
-  double k1, k2, k3, k4;
+  double k1, k2, k3, k4, k5, k6, k7;
   
   for (int t=1; t<=steps; t++){
     fprintf(theta_doc, "%16.8f", t*h);
     
     for (int i=0; i<nodes; i++){  
-
+      
       somma[i] = 0;
       for (int j = AI[i]+1; j<=AI[i+1]; j++){
 	 somma[i] += 1.03 * sin(theta[i+(t-1)*nodes] - theta[(AV[j]-1) + (t-1)*nodes]);

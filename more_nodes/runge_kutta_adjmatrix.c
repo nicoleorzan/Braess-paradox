@@ -19,8 +19,7 @@ double omega_funct(double omega_old, double alpha, double gamma, double theta, d
 
 int main(){
 
-  //int nodes = 8;
-  int steps = 2000;
+  int steps = 2500;
   
   double fR = 50;
   double wR = 2*M_PI*fR;
@@ -82,8 +81,8 @@ int main(){
 
   //adding line 2 - 4 to unstabilize network
   
-  ADJ[1+3*nodes] = 1;
-  ADJ[3+1*nodes] = 1;
+  //ADJ[1+3*nodes] = 1;
+  //ADJ[3+1*nodes] = 1;
 
   
   // integration using euler method
