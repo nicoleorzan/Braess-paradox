@@ -6,16 +6,8 @@
 #include <sys/times.h>
 #include <time.h>
 
-# define nodes 8
 
-#define TCPU_TIME (clock_gettime( CLOCK_PROCESS_CPUTIME_ID, &ts ), (double)ts.tv_sec +	\
-		   (double)ts.tv_nsec * 1e-9)
-
-int connections = 20;
-double alpha = 1;
-double Gamma = 0.1;
-double P[8] = {-1, 1, 1, 1, -1, -1, 1, -1};
-
+const double P[8] = {-1, 1, 1, 1, -1, -1, 1, -1};
 
 double omega_funct(double omega_old, double theta, double somma, int i){
   return -alpha*omega_old - Gamma*theta + P[i] - somma;
@@ -46,39 +38,18 @@ int main(){
   
   // reading from file
 
-  FILE *AII, *AVV, *W;
+  
   int AI[nodes+1],  AV[connections];
   double weights[connections];
-  AVV = fopen("files_to_read/AV.txt", "r");
-  //AVV = fopen("files_to_read/AV_adding_line.txt", "r");
-  AII = fopen("files_to_read/AI.txt", "r");
-  //AII = fopen("files_to_read/AI_adding_line.txt", "r");
-  W = fopen("files_to_read/weights.txt", "r");
-  //W = fopen("files_to_read/weights_adding_line.txt", "r");
 
-  if (AII == NULL || AVV == NULL || W == NULL){
-    printf("Error Reading File\n");
-    exit(0);
-  }
-
-  for (int i = 0; i < connections; i++){
-    fscanf(W, "%lf,", &weights[i] );
-    fscanf(AVV, "%d,", &AV[i] );
-  }
-  for (int i = 0; i < nodes+1; i++){
-    fscanf(AII, "%d,", &AI[i] );
-  }
- 
-  fclose(AVV);
-  fclose(AII);
-  fclose(W);
+  // reading from file
+  
+  file_reader(AI, AV, weights);
 
   //doubling nodes 3-4 capacity
   //weights[5] = weights[0] * 2;
   //weights[8] = weights[0] * 2;
-  
-
-  
+    
   // integration using runge-kutta method of 4th order
 
   FILE *theta_doc;
@@ -113,9 +84,7 @@ int main(){
 
       omega[i] = omega[i] + h6*(k1[0]+2*k2[0]+2*k3[0]+k4[0]);
       theta[i] = theta[i] + h6*(k1[1]+2*k2[1]+2*k3[1]+k4[1]);
-      
-      
-          
+                
       if (t % printing_step == 0){
 	fprintf(theta_doc, "%16.8e", theta[i]/M_PI);
       }
