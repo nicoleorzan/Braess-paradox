@@ -61,7 +61,7 @@ int main(){
   theta_doc = fopen("theta", "w");
   
   double sum = 0, max_capacity = 1.73, deltaK = 0.1;
-  double cap = weights[0];
+  double cap = weights[5];
   int iter = 0, printing_step = 2400;
   
   while (cap < max_capacity){
@@ -74,9 +74,7 @@ int main(){
     }
    
     for (int t=1; t<=steps; t++){
- 
       runge_kutta(omega, theta, AI, AV, weights);
-	
     }
       
     fprintf(theta_doc, "%16.8e", (theta[3]-theta[4])/M_PI); //diff nodes 4-5
