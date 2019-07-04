@@ -20,12 +20,10 @@ double theta_funct(double omega){
 
 int main(){
 
-  int steps = 2500;
-
   double tstart, tstop, ctime = 0;
   struct timespec ts;
   
-  int printing_step = 10;
+  int steps = 2500, printing_step = 10;
   double h = 0.01;
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));

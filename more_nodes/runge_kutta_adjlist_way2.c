@@ -34,12 +34,10 @@ void derivs(double *y, double *dydt, int *AI, int *AV, double *weights){
 
 int main(){
 
-  int steps = 2500;
-
   double tstart, tstop, ctime=0;
   struct timespec ts;
   
-  int printing_step = 10;
+  int steps = 2500, printing_step = 10;
   double h = 0.01;
   double *y = (double*) malloc(2 * nodes * sizeof(double));
   
@@ -98,7 +96,6 @@ int main(){
       }
     }
           
-
    if (t % printing_step == 0) fprintf(theta_doc, "\n");
   }
 
