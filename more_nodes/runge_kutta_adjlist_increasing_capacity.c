@@ -17,15 +17,16 @@ int main(){
 
   int steps = 2500;
 
-  double fR = 50;
-  double wR = 2*M_PI*fR;
   double h = 0.01;
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
   
   // reading from file
- 
-  file_reader(AI, AV, weights);  
+
+  int AI[nodes+1],  AV[connections];
+  double weights[connections];
+  
+  file_reader(AI, AV, weights, "files_to_read/AI.txt", "files_to_read/AV.txt", "files_to_read/weights.txt");
   
   // integration using runge-kutta method of 4th order
 
@@ -91,7 +92,6 @@ int main(){
     cap += deltaK;
 
     fprintf(theta_doc, "\n");
-    
   }
    
 

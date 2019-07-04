@@ -10,16 +10,13 @@
 
 extern const double P[8];
 
-const void file_reader(int* AI, int* AV, double* weights){
+const void file_reader(int* AI, int* AV, double* weights, char* ai_name, char* av_name, char* weights_name){
 
   FILE *AII, *AVV, *W;
   
-  AVV = fopen("files_to_read/AV.txt", "r");
-  //AVV = fopen("files_to_read/AV_adding_line.txt", "r");
-  AII = fopen("files_to_read/AI.txt", "r");
-  //AII = fopen("files_to_read/AI_adding_line.txt", "r");
-  W = fopen("files_to_read/weights.txt", "r");
-  //W = fopen("files_to_read/weights_adding_line.txt", "r");
+  AVV = fopen(av_name, "r");
+  AII = fopen(ai_name, "r");
+  W = fopen(weights_name, "r");
 
   if (AII == NULL || AVV == NULL || W == NULL){
     printf("Error Reading File\n");

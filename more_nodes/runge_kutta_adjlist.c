@@ -22,12 +22,10 @@ int main(){
 
   int steps = 2500;
 
-  double tstart, tstop, ctime=0;
+  double tstart, tstop, ctime = 0;
   struct timespec ts;
   
   int printing_step = 10;
-  double fR = 50;
-  double wR = 2*M_PI*fR;
   double h = 0.01;
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
@@ -41,10 +39,8 @@ int main(){
   
   int AI[nodes+1],  AV[connections];
   double weights[connections];
-
-  // reading from file
-  
-  file_reader(AI, AV, weights);
+ 
+  file_reader(AI, AV, weights, "files_to_read/AI.txt", "files_to_read/AV.txt", "files_to_read/weights.txt");
 
   //doubling nodes 3-4 capacity
   //weights[5] = weights[0] * 2;
