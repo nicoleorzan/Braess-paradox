@@ -13,21 +13,18 @@ const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
 void derivs(double *y, double *dydt, int *AI, int *AV, double *weights){
 
   double sum = 0;
-  for (int i=0; i<2*nodes; i++){
+
+  for (int i=0; i<nodes; i++){
     
-    if (i>=0 && i<nodes){  //working on theta
-      dydt[i] = y[i+nodes];
-    }
-    
-    else if (i>=nodes && i<2*nodes){ //working on omega
-      sum = 0;
-      for (int j = AI[i-nodes]; j < AI[i-nodes+1]; j++){
-	sum += weights[j] * sin( y[i-nodes] - y[(AV[j])-nodes] );
+    sum = 0;
+    for (int j = AI[i]; j < AI[i+1]; j++){
+	sum += weights[j] * sin( y[i] - y[(AV[j])] );
       }
-      dydt[i] = -alpha*y[i] - Gamma*y[i-nodes] + P[i-nodes] - sum; 
-    }
+    dydt[i] = y[i+nodes];
+    dydt[i+nodes] = -alpha*y[i+nodes] - Gamma*y[i] + P[i] - sum;
+    
   }
-  
+
 }
 
 
@@ -38,7 +35,6 @@ int main(){
   struct timespec ts;
   
   int steps = 2500, printing_step = 10;
-  double h = 0.01;
   double *y = (double*) malloc(2 * nodes * sizeof(double));
   
   for (int i=0; i<2*nodes; i++){
@@ -63,7 +59,6 @@ int main(){
   // integration using runge-kutta method of 4th order
 
   FILE *theta_doc;
-  double hh = h/0.5, h6 = h/6;
   
   theta_doc = fopen("theta", "w");
 

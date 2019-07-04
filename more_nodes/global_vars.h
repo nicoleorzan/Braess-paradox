@@ -1,16 +1,19 @@
 #ifndef GLOBAL_VARIABLES
 #define GLOBAL_VARIABLES
 
-
 #include <string.h>
 
 
 #define TCPU_TIME (clock_gettime( CLOCK_PROCESS_CPUTIME_ID, &ts ), (double)ts.tv_sec +	\
 		   (double)ts.tv_nsec * 1e-9)
+
 #define nodes 8
 #define connections 20
 #define alpha 1
 #define Gamma 0.1
+#define h 0.01
+#define hh h/0.5
+#define h6 h/6
 
 extern const double P[8];
 
