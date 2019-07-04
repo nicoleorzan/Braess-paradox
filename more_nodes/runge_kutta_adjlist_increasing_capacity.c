@@ -3,7 +3,7 @@
 #include <math.h>
 #include "global_vars.h"
 
-const double P[8] = {-1, 1, 1, 1, -1, -1, 1, -1};
+const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
 
 double omega_funct(double omega_old, double theta, double somma, int i){
   return -alpha*omega_old - Gamma*theta + P[i] - somma;
@@ -20,6 +20,7 @@ int main(){
   double h = 0.01;
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
+
   
   // reading from file
 
@@ -96,6 +97,10 @@ int main(){
    
 
   fclose(theta_doc);
+  memset(theta_doc, 0, sizeof(*theta_doc));
+  free(theta_doc);
+  memset(theta, 0, sizeof(*theta));
+  memset(omega, 0, sizeof(*omega));
   free(theta);  free(omega);
   
   return 0;

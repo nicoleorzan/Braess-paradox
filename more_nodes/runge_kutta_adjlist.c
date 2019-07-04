@@ -7,7 +7,7 @@
 #include <time.h>
 
 
-const double P[8] = {-1, 1, 1, 1, -1, -1, 1, -1};
+const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
 
 double omega_funct(double omega_old, double theta, double somma, int i){
   return -alpha*omega_old - Gamma*theta + P[i] - somma;
@@ -60,7 +60,7 @@ int main(){
   tstart = TCPU_TIME;
 
   for (int t=1; t<=steps; t++){
-    fprintf(theta_doc, "%16.8f", t*h);
+    if (t % printing_step == 0) fprintf(theta_doc, "%16.8f", t*h);
 
     for (int i=0; i<nodes; i++){
 
@@ -85,13 +85,18 @@ int main(){
 	fprintf(theta_doc, "%16.8e", theta[i]/M_PI);
       }
     }
-    fprintf(theta_doc, "\n");
+    if (t % printing_step == 0) fprintf(theta_doc, "\n");
   }
 
   ctime += TCPU_TIME - tstart;
   printf("%g sec \n", ctime);
 
+
   fclose(theta_doc);
+  memset(theta_doc, 0, sizeof(*theta_doc));
+  free(theta_doc);
+  memset(theta, 0, sizeof(*theta));
+  memset(omega, 0, sizeof(*omega));
   free(theta);  free(omega);
   
   return 0;

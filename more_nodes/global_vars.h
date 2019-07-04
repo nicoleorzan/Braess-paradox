@@ -1,6 +1,10 @@
 #ifndef GLOBAL_VARIABLES
 #define GLOBAL_VARIABLES
 
+
+#include <string.h>
+
+
 #define TCPU_TIME (clock_gettime( CLOCK_PROCESS_CPUTIME_ID, &ts ), (double)ts.tv_sec +	\
 		   (double)ts.tv_nsec * 1e-9)
 #define nodes 8
@@ -31,8 +35,14 @@ const void file_reader(int* AI, int* AV, double* weights, char* ai_name, char* a
   }
  
   fclose(AVV);
+  memset(AVV, 0, sizeof(*AVV));
+  free(AVV);
   fclose(AII);
+  memset(AII, 0, sizeof(*AII));
+  free(AII);
   fclose(W);
+  memset(W, 0, sizeof(*W));
+  free(W);
 }
 
 
