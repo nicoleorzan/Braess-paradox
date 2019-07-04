@@ -5,9 +5,9 @@
 
 # define nodes 8
 
-int connections = 22;
+int connections = 20;
 double alpha = 1;
-double Gamma = 0;
+double Gamma = 0.1;
 double P[8] = {-1, 1, 1, 1, -1, -1, 1, -1};
 
 
@@ -40,7 +40,6 @@ int main(){
 
   int steps = 2500;
 
-  int printing_step = 2400;
   double fR = 50;
   double wR = 2*M_PI*fR;
   double h = 0.01;
@@ -57,12 +56,12 @@ int main(){
   FILE *AII, *AVV, *W;
   int AI[nodes+1],  AV[connections];
   double weights[connections];
-  //AVV = fopen("files_to_read/AV.txt", "r");
-  AVV = fopen("files_to_read/AV_adding_line.txt", "r");
-  //AII = fopen("files_to_read/AI.txt", "r");
-  AII = fopen("files_to_read/AI_adding_line.txt", "r");
-  //W = fopen("files_to_read/weights.txt", "r");
-  W = fopen("files_to_read/weights_adding_line.txt", "r");
+  AVV = fopen("files_to_read/AV.txt", "r");
+  //AVV = fopen("files_to_read/AV_adding_line.txt", "r");
+  AII = fopen("files_to_read/AI.txt", "r");
+  //AII = fopen("files_to_read/AI_adding_line.txt", "r");
+  W = fopen("files_to_read/weights.txt", "r");
+  //W = fopen("files_to_read/weights_adding_line.txt", "r");
 
   if (AII == NULL || AVV == NULL || W == NULL){
     printf("Error Reading File\n");
@@ -86,8 +85,7 @@ int main(){
   FILE *theta_doc;
   double hh = h/0.5, h6 = h/6;
   double sum = 0;
-  double deltaK = 0.1;
-  
+    
   theta_doc = fopen("theta", "w");
   
   double k1[2], k2[2], k3[2], k4[2];
@@ -96,7 +94,9 @@ int main(){
 
   double cap = weights[0];
   int iter = 0;
-  double max_capacity = 1.5;
+  double max_capacity = 1.73;
+  double deltaK = 0.1;
+  int printing_step = 2400;
   
   while (cap < max_capacity){
 
@@ -114,7 +114,6 @@ int main(){
       for (int i=0; i<nodes; i++){
 
 	sum = 0;
-
 	for (int j = AI[i]; j < AI[i+1]; j++){
 	  sum += weights[j] * sin( theta[i] - theta[(AV[j])] ); 
 	}
@@ -161,7 +160,12 @@ int main(){
     iter+=1;
     cap += deltaK;
 
+    for (int k=0; k<connections; k++){
+      fprintf(stdout, "%f ", weights[k]);
+    }
+
     fprintf(theta_doc, "\n");
+    fprintf(stdout, "\n");
     
   }
    

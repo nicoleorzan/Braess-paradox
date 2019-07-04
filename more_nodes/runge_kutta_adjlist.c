@@ -11,9 +11,9 @@
 #define TCPU_TIME (clock_gettime( CLOCK_PROCESS_CPUTIME_ID, &ts ), (double)ts.tv_sec +	\
 		   (double)ts.tv_nsec * 1e-9)
 
-int connections = 22;
+int connections = 20;
 double alpha = 1;
-double Gamma = 0;
+double Gamma = 0.1;
 double P[8] = {-1, 1, 1, 1, -1, -1, 1, -1};
 
 
@@ -62,12 +62,12 @@ int main(){
   FILE *AII, *AVV, *W;
   int AI[nodes+1],  AV[connections];
   double weights[connections];
-  //AVV = fopen("files_to_read/AV.txt", "r");
-  AVV = fopen("files_to_read/AV_adding_line.txt", "r");
-  //AII = fopen("files_to_read/AI.txt", "r");
-  AII = fopen("files_to_read/AI_adding_line.txt", "r");
-  W = fopen("files_to_read/weights_adding_line.txt", "r");
-  //W = fopen("files_to_read/weights.txt", "r");
+  AVV = fopen("files_to_read/AV.txt", "r");
+  //AVV = fopen("files_to_read/AV_adding_line.txt", "r");
+  AII = fopen("files_to_read/AI.txt", "r");
+  //AII = fopen("files_to_read/AI_adding_line.txt", "r");
+  //W = fopen("files_to_read/weights_adding_line.txt", "r");
+  W = fopen("files_to_read/weights.txt", "r");
 
   if (AII == NULL || AVV == NULL || W == NULL){
     printf("Error Reading File\n");
@@ -85,7 +85,8 @@ int main(){
   fclose(AVV);
   fclose(AII);
   fclose(W);
-
+  weights[5] = weights[0] * 2;
+  weights[8] = weights[0] * 2;
   
   // variables initialization
   
