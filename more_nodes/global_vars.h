@@ -14,7 +14,7 @@
 
 extern const double P[8];
 
-const void file_reader(int* AI, int* AV, double* weights, char* ai_name, char* av_name, char* weights_name){
+const void file_reader(int* AI, int* AV, double* weights, char const * ai_name, char const * av_name, char const * weights_name){
 
   FILE *AII, *AVV, *W;
   

@@ -38,7 +38,11 @@ int main(){
   int AI[nodes+1],  AV[connections];
   double weights[connections];
  
-  file_reader(AI, AV, weights, "files_to_read/AI.txt", "files_to_read/AV.txt", "files_to_read/weights.txt");
+  char const * ai = "files_to_read/AI.txt";
+  char const * av = "files_to_read/AV.txt";
+  char const * ww = "files_to_read/weights.txt";
+  
+  file_reader(AI, AV, weights, ai, av, ww);
 
   //doubling nodes 3-4 capacity
   //weights[5] = weights[0] * 2;
