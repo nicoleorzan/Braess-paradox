@@ -1,5 +1,6 @@
 #ifndef GLOBAL_VARIABLES
 #define GLOBAL_VARIABLES
+
 #include <string.h>
 #include <sys/resource.h>
 #include <sys/times.h>
@@ -12,7 +13,8 @@
 #define nodes 8
 #define connections 20
 #define alpha 1
-#define Gamma 0
+#define Pmax 0.1
+#define Gamma 0.1
 #define h 0.01
 #define hh h*0.5
 #define h6 h/6
@@ -21,6 +23,7 @@ extern const double P[nodes];
 extern const int AI[nodes+1];
 extern const int AV[connections];
 extern double weights[connections];
+extern double delta;
 
 
 const void file_reader(int* AI, int* AV, double* weights, char const * ai_name, char const * av_name, char const * weights_name){

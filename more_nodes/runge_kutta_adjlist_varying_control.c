@@ -45,10 +45,10 @@ void runge_kutta(double* omega, double* theta, int internal_step){
     }
   }
 
-}
+  }
 
 
-void stability_check(double* omega, double* theta){
+void stability_check(double* omega, double* theta, bool* unstable){
   
   double theta_save[nodes];
   double error[nodes];
@@ -68,10 +68,13 @@ void stability_check(double* omega, double* theta){
   }
   if (sum >= 10e-10) {
     fprintf(stdout, "error =%16.8e\n", sum);
+    fprintf(stdout, "delta =%16.8e\n", delta);
     fprintf(stdout, "Stability not reached\n");
+    *unstable = 1;
   }
   else {
     fprintf(stdout, "error =%16.8e\n", sum);
+    fprintf(stdout, "delta =%16.8e\n", delta);
     fprintf(stdout, "Stability reached\n");
   }
   
@@ -100,24 +103,35 @@ int main(){
   FILE *theta_doc;
   theta_doc = fopen("theta", "w");
   
+  double delta_step = 0.01, delta_min = 0.7;
+  bool unstable = 0;
+
   tstart = TCPU_TIME;
 
-
-  for (int t=1; t<=steps; t+=internal_step){
-
-    runge_kutta(omega, theta, internal_step);
-
-    //printing one file
-    fprintf(theta_doc, "%16.8f", t*h);
-    for (int i=0; i<nodes; i++){
-      fprintf(theta_doc, "%16.8e", theta[i]/M_PI);
-    }
-    fprintf(theta_doc, "\n");
+  while (delta > delta_min){
     
+    for (int i=0; i<nodes; i++){
+    theta[i] = 0;
+    omega[i] = 0;
+    }
+    
+    for (int t=1; t<=steps; t+=internal_step){
+
+      runge_kutta(omega, theta, internal_step);
+
+      //printing one file
+      fprintf(theta_doc, "%16.8f", t*h);
+      for (int i=0; i<nodes; i++){
+	fprintf(theta_doc, "%16.8e", theta[i]/M_PI);
+      }
+      fprintf(theta_doc, "\n");
+    
+    }
+
+    stability_check(omega, theta, &unstable);
+    if (unstable == 1) break;
+    delta = delta - delta_step;
   }
-
-  stability_check(omega, theta);
-
 
   ctime += TCPU_TIME - tstart;
   printf("%g sec \n", ctime);

@@ -7,10 +7,12 @@ const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
 const int AI[nodes+1] = {0, 3, 5, 8, 11, 13, 16, 18, 20};
 const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5};
 double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
+double delta = 1;
 
 
 double omega_funct(double omega_old, double theta, double somma, int i){
   return -alpha*omega_old - Gamma*theta + P[i] - somma;
+  //return -alpha*omega_old - Pmax*tanh(delta*theta) + P[i] - somma;
 }
 
 void printer(double * y, FILE * f){
@@ -75,13 +77,13 @@ void stability_check(double* omega, double* theta){
     error[i] = fabs(theta_save[i] - theta[i]);
     sum += error[i];
   }
-  if (sum == 0.) {
-    fprintf(stdout, "error = %16.8e\n", sum);
-    fprintf(stdout, "Stability reached\n");
+  if (sum >= 10e-10) {
+    fprintf(stdout, "error =%16.8e\n", sum);
+    fprintf(stdout, "Stability not reached\n");
   }
   else {
-    fprintf(stdout, "error = %16.8e\n", sum);
-    fprintf(stdout, "Stability not reached\n");
+    fprintf(stdout, "error =%16.8e\n", sum);
+    fprintf(stdout, "Stability reached\n");
   }
   
 }
