@@ -55,12 +55,42 @@ void runge_kutta(double* omega, double* theta, int internal_step){
     }
   }
 
-
 }
+
+void stability_check(double* omega, double* theta){
+  
+  double theta_save[nodes];
+  double error[nodes];
+  double sum = 0.;
+  
+  for (int i=0; i<nodes; i++){
+    theta_save[i] = theta[i];
+    error[i] = 0.;
+  }
+
+  int additive_steps = 100;
+  runge_kutta(omega, theta, additive_steps);
+
+  for (int i=0; i<nodes; i++){
+    error[i] = fabs(theta_save[i] - theta[i]);
+    sum += error[i];
+  }
+  if (sum == 0.) {
+    fprintf(stdout, "error = %16.8e\n", sum);
+    fprintf(stdout, "Stability reached\n");
+  }
+  else {
+    fprintf(stdout, "error = %16.8e\n", sum);
+    fprintf(stdout, "Stability not reached\n");
+  }
+  
+}
+
+
 
 int main(){
 
-  int steps = 2500, internal_step = 10, printing_step = 2400;
+  int steps = 25000, internal_step = 10, printing_step = 2400;
 
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
@@ -73,6 +103,7 @@ int main(){
   int iter = 0;
 
   // iterate increasing capacity
+  
   while (cap < max_capacity){
 
     fprintf(theta_doc, "%16.8f", deltaK*iter);
@@ -85,6 +116,7 @@ int main(){
     for (int t=1; t<=steps; t+=internal_step){
       runge_kutta(omega, theta, internal_step);
     }
+    stability_check(omega, theta);
 
     printer(theta, theta_doc);
            

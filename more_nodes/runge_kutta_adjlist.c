@@ -56,15 +56,21 @@ void stability_check(double* omega, double* theta){
     error[i] = 0.;
   }
 
-  int additive_steps = 50;
+  int additive_steps = 100;
   runge_kutta(omega, theta, additive_steps);
 
   for (int i=0; i<nodes; i++){
-    error[i] = abs(theta_save[i] - theta[i]);
+    error[i] = fabs(theta_save[i] - theta[i]);
     sum += error[i];
   }
-  if (sum == 0.) fprintf(stdout, "Stability reached\n");
-  else fprintf(stdout, "Stability not reached\n");
+  if (sum == 0.) {
+    fprintf(stdout, "error = %16.8e\n", sum);
+    fprintf(stdout, "Stability reached\n");
+  }
+  else {
+    fprintf(stdout, "error = %16.8e\n", sum);
+    fprintf(stdout, "Stability not reached\n");
+  }
   
 }
 
@@ -76,7 +82,7 @@ int main(){
   double tstart, tstop, ctime = 0;
   struct timespec ts;
   
-  int steps = 2500, internal_step = 10, printing_step = 10;
+  int steps = 25000, internal_step = 10, printing_step = 10;
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
   for (int i=0; i<nodes; i++){
