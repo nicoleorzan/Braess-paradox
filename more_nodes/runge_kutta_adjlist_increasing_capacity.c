@@ -26,36 +26,40 @@ void printer(double * y, FILE * f){
   fprintf(f, "%16.8e\n", (y[6]-y[0])/M_PI); //diff nodes 7-1
 }
 
-void runge_kutta(double* omega, double* theta){
+void runge_kutta(double* omega, double* theta, int internal_step){
   
   double k1[2], k2[2], k3[2], k4[2];
   double sum = 0;
-  
-  for (int i=0; i<nodes; i++){
+    
+  for (int t=0; t<internal_step; t++){
+    
+    for (int i=0; i<nodes; i++){
 
-    sum = 0;
-    for (int j = AI[i]; j < AI[i+1]; j++){
-      sum += weights[j] * sin( theta[i] - theta[(AV[j])] ); 
-    }
+      sum = 0;
+      for (int j = AI[i]; j < AI[i+1]; j++){
+	sum += weights[j] * sin( theta[i] - theta[(AV[j])] ); 
+      }
 	
-    k1[0] = omega_funct(omega[i], theta[i], sum, i);
-    k1[1] = omega[i];
-    k2[0] = omega_funct(omega[i]+k1[0]*hh, theta[i]+k1[1]*hh, sum, i);
-    k2[1] = omega[i]+k1[1]*hh;
-    k3[0] = omega_funct(omega[i]+k2[0]*hh, theta[i]+k2[1]*hh, sum, i);
-    k3[1] = omega[i]+k2[1]*hh;
-    k4[0] = omega_funct(omega[i]+k3[0]*h, theta[i]+k3[1]*hh, sum, i);
-    k4[1] = omega[i]+k3[1]*h;
+      k1[0] = omega_funct(omega[i], theta[i], sum, i);
+      k1[1] = omega[i];
+      k2[0] = omega_funct(omega[i]+k1[0]*hh, theta[i]+k1[1]*hh, sum, i);
+      k2[1] = omega[i]+k1[1]*hh;
+      k3[0] = omega_funct(omega[i]+k2[0]*hh, theta[i]+k2[1]*hh, sum, i);
+      k3[1] = omega[i]+k2[1]*hh;
+      k4[0] = omega_funct(omega[i]+k3[0]*h, theta[i]+k3[1]*hh, sum, i);
+      k4[1] = omega[i]+k3[1]*h;
 
-    omega[i] = omega[i] + h6*(k1[0]+2*k2[0]+2*k3[0]+k4[0]);
-    theta[i] = theta[i] + h6*(k1[1]+2*k2[1]+2*k3[1]+k4[1]);
+      omega[i] = omega[i] + h6*(k1[0]+2*k2[0]+2*k3[0]+k4[0]);
+      theta[i] = theta[i] + h6*(k1[1]+2*k2[1]+2*k3[1]+k4[1]);
+    }
   }
+
 
 }
 
 int main(){
 
-  int steps = 2500, printing_step = 2400;
+  int steps = 2500, internal_step = 10, printing_step = 2400;
 
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
@@ -77,8 +81,8 @@ int main(){
       omega[i] = 0;
     }
    
-    for (int t=1; t<=steps; t++){
-      runge_kutta(omega, theta);
+    for (int t=1; t<=steps; t+=internal_step){
+      runge_kutta(omega, theta, internal_step);
     }
 
     printer(theta, theta_doc);
