@@ -2,18 +2,18 @@
 #include <stdio.h>
 #include <math.h>
 #include "global_vars.h"
-#include <sys/resource.h>
-#include <sys/times.h>
-#include <time.h>
-
 
 const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
+const int AI[nodes+1] = {0, 3, 5, 8, 11, 13, 16, 18, 20};
+const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5};
+double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
+
 
 double omega_funct(double omega_old, double theta, double somma, int i){
   return -alpha*omega_old - Gamma*theta + P[i] - somma;
 }
 
-void runge_kutta(double* omega, double* theta, int *AI, int *AV, double *weights){
+void runge_kutta(double* omega, double* theta){
   
   double k1[2], k2[2], k3[2], k4[2];
   double sum = 0;
@@ -42,7 +42,7 @@ void runge_kutta(double* omega, double* theta, int *AI, int *AV, double *weights
 
 
 int main(){
-
+ 
   double tstart, tstop, ctime = 0;
   struct timespec ts;
   
@@ -53,18 +53,6 @@ int main(){
     theta[i] = 0;
     omega[i] = 0;
   }
-  
-  // reading from file
-
-  
-  int AI[nodes+1],  AV[connections];
-  double weights[connections];
- 
-  char const * ai = "files_to_read/AI.txt";
-  char const * av = "files_to_read/AV.txt";
-  char const * ww = "files_to_read/weights.txt";
-  
-  file_reader(AI, AV, weights, ai, av, ww);
 
   //doubling nodes 3-4 capacity
   //weights[5] = weights[0] * 2;
@@ -79,7 +67,7 @@ int main(){
   for (int t=1; t<=steps; t++){
     if (t % printing_step == 0) fprintf(theta_doc, "%16.8f", t*h);
 
-    runge_kutta(omega, theta, AI, AV, weights);
+    runge_kutta(omega, theta);
 
     if (t % printing_step == 0){
       for (int i=0; i<nodes; i++){

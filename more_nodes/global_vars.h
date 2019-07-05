@@ -1,7 +1,9 @@
 #ifndef GLOBAL_VARIABLES
 #define GLOBAL_VARIABLES
-
 #include <string.h>
+#include <sys/resource.h>
+#include <sys/times.h>
+#include <time.h>
 
 
 #define TCPU_TIME (clock_gettime( CLOCK_PROCESS_CPUTIME_ID, &ts ), (double)ts.tv_sec +	\
@@ -15,7 +17,11 @@
 #define hh h*0.5
 #define h6 h/6
 
-extern const double P[8];
+extern const double P[nodes];
+extern const int AI[nodes+1];
+extern const int AV[connections];
+extern double weights[connections];
+
 
 const void file_reader(int* AI, int* AV, double* weights, char const * ai_name, char const * av_name, char const * weights_name){
 

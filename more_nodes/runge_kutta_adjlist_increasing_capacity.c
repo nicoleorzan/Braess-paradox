@@ -4,6 +4,10 @@
 #include "global_vars.h"
 
 const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
+const int AI[nodes+1] = {0, 3, 5, 8, 11, 13, 16, 18, 20};
+const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5};
+double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
+
 
 double omega_funct(double omega_old, double theta, double somma, int i){
   return -alpha*omega_old - Gamma*theta + P[i] - somma;
@@ -22,7 +26,7 @@ void printer(double * y, FILE * f){
   fprintf(f, "%16.8e\n", (y[6]-y[0])/M_PI); //diff nodes 7-1
 }
 
-void runge_kutta(double* omega, double* theta, int *AI, int *AV, double *weights){
+void runge_kutta(double* omega, double* theta){
   
   double k1[2], k2[2], k3[2], k4[2];
   double sum = 0;
@@ -56,18 +60,6 @@ int main(){
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
 
-  // reading from file
-
-  int AI[nodes+1],  AV[connections];
-  double weights[connections];
-  
-  char const * ai = "files_to_read/AI.txt";
-  char const * av = "files_to_read/AV.txt";
-  char const * ww = "files_to_read/weights.txt";
-  
-  file_reader(AI, AV, weights, ai, av, ww);
-  
-  
   FILE *theta_doc;
   theta_doc = fopen("theta", "w");
   
@@ -86,7 +78,7 @@ int main(){
     }
    
     for (int t=1; t<=steps; t++){
-      runge_kutta(omega, theta, AI, AV, weights);
+      runge_kutta(omega, theta);
     }
 
     printer(theta, theta_doc);

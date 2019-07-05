@@ -3,14 +3,14 @@
 #include <string.h>
 #include <math.h>
 #include "global_vars.h"
-#include <sys/resource.h>
-#include <sys/times.h>
-#include <time.h>
-
 
 const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
+const int AI[nodes+1] = {0, 3, 5, 8, 11, 13, 16, 18, 20};
+const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5};
+double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
 
-void derivs(double *y, double *dydt, int *AI, int *AV, double *weights){
+
+void derivs(double *y, double *dydt){
 
   double sum = 0;
 
@@ -40,52 +40,43 @@ int main(){
   for (int i=0; i<2*nodes; i++){
     y[i] = 0;
   }
-  
-  // reading from file
-
-  int AI[nodes+1],  AV[connections];
-  double weights[connections];
-  
-  char const * ai = "files_to_read/AI.txt";
-  char const * av = "files_to_read/AV.txt";
-  char const * ww = "files_to_read/weights.txt";
-  
-  file_reader(AI, AV, weights, ai, av, ww);
 
   //doubling nodes 3-4 capacity
   //weights[5] = weights[0] * 2;
   //weights[8] = weights[0] * 2;
-  
-  // integration using runge-kutta method of 4th order
+
 
   FILE *theta_doc;
-  
   theta_doc = fopen("theta", "w");
 
   double yt[nodes*2] = {0}, dym[nodes*2] = {0}, dyt[nodes*2] = {0}, dydx[nodes*2] = {0};
+  for (int i=0; i<nodes*1; i++){
+    yt[i] = 0.;
+    dym[i] = 0.;
+    dyt[i] = 0.;
+    dydx[i] = 0.;
+  }
 
   tstart = TCPU_TIME;
 
   for (int t=1; t<=steps; t++){
     if (t % printing_step == 0) fprintf(theta_doc, "%16.8f", t*h);
-    
-    //derivs(y, dydx, AV, AI, weights);
 
     for (int i=0; i<2*nodes; i++){
       yt[i] = y[i] + hh*dydx[i];
     }
-    derivs(yt, dyt, AV, AI, weights);
+    derivs(yt, dyt);
   
     for (int i=0; i<2*nodes; i++){
       yt[i] = y[i] + hh*dyt[i];
     }
-    derivs(yt, dym, AV, AI, weights);
+    derivs(yt, dym);
 
     for (int i=0; i<2*nodes; i++) {
       yt[i] = y[i] + h*dym[i];
       dym[i] += dyt[i];
     }
-    derivs(yt, dyt, AV, AI, weights);
+    derivs(yt, dyt);
 
     for (int i=0; i<2*nodes; i++) {
       y[i] = y[i] + h6*(dydx[i]+dyt[i]+2.0*dym[i]);
