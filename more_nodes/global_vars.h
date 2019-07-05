@@ -12,7 +12,7 @@
 #define nodes 8
 #define connections 20
 #define alpha 1
-#define Gamma 0.1
+#define Gamma 0
 #define h 0.01
 #define hh h*0.5
 #define h6 h/6

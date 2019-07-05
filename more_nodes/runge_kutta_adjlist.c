@@ -13,6 +13,7 @@ double omega_funct(double omega_old, double theta, double somma, int i){
   return -alpha*omega_old - Gamma*theta + P[i] - somma;
 }
 
+
 void runge_kutta(double* omega, double* theta, int internal_step){
 
   double k1[2], k2[2], k3[2], k4[2];
@@ -42,6 +43,32 @@ void runge_kutta(double* omega, double* theta, int internal_step){
   }
 
 }
+
+
+void stability_check(double* omega, double* theta){
+  
+  double theta_save[nodes];
+  double error[nodes];
+  double sum = 0.;
+  
+  for (int i=0; i<nodes; i++){
+    theta_save[i] = theta[i];
+    error[i] = 0.;
+  }
+
+  int additive_steps = 50;
+  runge_kutta(omega, theta, additive_steps);
+
+  for (int i=0; i<nodes; i++){
+    error[i] = abs(theta_save[i] - theta[i]);
+    sum += error[i];
+  }
+  if (sum == 0.) fprintf(stdout, "Stability reached\n");
+  else fprintf(stdout, "Stability not reached\n");
+  
+}
+
+
 
 
 int main(){
@@ -79,6 +106,8 @@ int main(){
     fprintf(theta_doc, "\n");
     
   }
+
+  stability_check(omega, theta);
 
   ctime += TCPU_TIME - tstart;
   printf("%g sec \n", ctime);

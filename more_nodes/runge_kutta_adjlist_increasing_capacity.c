@@ -23,7 +23,8 @@ void printer(double * y, FILE * f){
   fprintf(f, "%16.8e", (y[5]-y[4])/M_PI); //diff nodes 6-5
   fprintf(f, "%16.8e", (y[5]-y[7])/M_PI); //diff nodes 6-8
   fprintf(f, "%16.8e", (y[1]-y[0])/M_PI); //diff nodes 2-1
-  fprintf(f, "%16.8e\n", (y[6]-y[0])/M_PI); //diff nodes 7-1
+  fprintf(f, "%16.8e", (y[6]-y[0])/M_PI); //diff nodes 7-1
+  fprintf(f, "\n");
 }
 
 void runge_kutta(double* omega, double* theta, int internal_step){
