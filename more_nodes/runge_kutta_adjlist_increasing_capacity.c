@@ -77,7 +77,7 @@ void stability_check(double* omega, double* theta){
     error[i] = fabs(theta_save[i] - theta[i]);
     sum += error[i];
   }
-  if (sum >= 10e-10) {
+  if (sum >= 10e-7) {
     fprintf(stdout, "error =%16.8e\n", sum);
     fprintf(stdout, "Stability not reached\n");
   }

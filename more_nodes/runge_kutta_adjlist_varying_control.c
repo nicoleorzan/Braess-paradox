@@ -45,7 +45,7 @@ void runge_kutta(double* omega, double* theta, int internal_step){
     }
   }
 
-  }
+}
 
 
 void stability_check(double* omega, double* theta, bool* unstable){
@@ -95,13 +95,9 @@ int main(){
     theta[i] = 0;
     omega[i] = 0;
   }
-
-  //doubling nodes 3-4 capacity
-  //weights[5] = weights[0] * 2;
-  //weights[8] = weights[0] * 2;
     
   FILE *theta_doc;
-  theta_doc = fopen("theta", "w");
+  theta_doc = fopen("control_variation", "w");
   
   double delta_step = 0.01, delta_min = 0.7;
   bool unstable = 0;
@@ -111,21 +107,12 @@ int main(){
   while (delta > delta_min){
     
     for (int i=0; i<nodes; i++){
-    theta[i] = 0;
-    omega[i] = 0;
+      theta[i] = 0;
+      omega[i] = 0;
     }
     
     for (int t=1; t<=steps; t+=internal_step){
-
       runge_kutta(omega, theta, internal_step);
-
-      //printing one file
-      fprintf(theta_doc, "%16.8f", t*h);
-      for (int i=0; i<nodes; i++){
-	fprintf(theta_doc, "%16.8e", theta[i]/M_PI);
-      }
-      fprintf(theta_doc, "\n");
-    
     }
 
     stability_check(omega, theta, &unstable);

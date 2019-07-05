@@ -7,13 +7,14 @@
 const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
 const int AI[nodes+1] = {0, 3, 5, 8, 11, 13, 16, 18, 20};
 const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5};
-double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
+double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03*2, 1.03, 1.03, 1.03*2, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
+//doubling nodes 3-4 capacity -> double weights in positions 5 and 8
 double delta = 1;
 
 
 double omega_funct(double omega_old, double theta, double somma, int i){
-  //return -alpha*omega_old - Pmax*delta*theta + P[i] - somma;
-  return -alpha*omega_old - Pmax*tanh(delta*theta) + P[i] - somma;
+  //return -alpha*omega_old - Gamma*theta + P[i] - somma; //Pmax*delta*theta
+  return -alpha*omega_old - Pmax*tanh(delta*theta) + P[i] - somma; 
 }
 
 
@@ -66,7 +67,7 @@ void stability_check(double* omega, double* theta){
     error[i] = fabs(theta_save[i] - theta[i]);
     sum += error[i];
   }
-  if (sum >= 10e-10) {
+  if (sum >= 10e-7) {
     fprintf(stdout, "error =%16.8e\n", sum);
     fprintf(stdout, "Stability not reached\n");
   }
@@ -85,7 +86,7 @@ int main(){
   double tstart, tstop, ctime = 0;
   struct timespec ts;
   
-  int steps = 25000, internal_step = 10, printing_step = 10;
+  int steps = 2500, internal_step = 10, printing_step = 10;
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
   for (int i=0; i<nodes; i++){
@@ -93,10 +94,6 @@ int main(){
     omega[i] = 0;
   }
 
-  //doubling nodes 3-4 capacity
-  //weights[5] = weights[0] * 2;
-  //weights[8] = weights[0] * 2;
-    
   FILE *theta_doc;
   theta_doc = fopen("theta", "w");
   
