@@ -67,16 +67,15 @@ int main(){
   
   file_reader(AI, AV, weights, ai, av, ww);
   
-  // integration using runge-kutta method of 4th order
-
+  
   FILE *theta_doc;
-    
   theta_doc = fopen("theta", "w");
   
   double sum = 0, max_capacity = 1.73, deltaK = 0.1;
   double cap = weights[5];
   int iter = 0;
-  
+
+  // iterate increasing capacity
   while (cap < max_capacity){
 
     fprintf(theta_doc, "%16.8f", deltaK*iter);
@@ -96,7 +95,6 @@ int main(){
     weights[8] += deltaK;
     iter += 1;
     cap += deltaK;
-   
   }
    
 
