@@ -9,6 +9,19 @@ double omega_funct(double omega_old, double theta, double somma, int i){
   return -alpha*omega_old - Gamma*theta + P[i] - somma;
 }
 
+void printer(double * y, FILE * f){
+  fprintf(f, "%16.8e", (y[3]-y[4])/M_PI); //diff nodes 4-5
+  fprintf(f, "%16.8e", (y[3]-y[7])/M_PI); //diff nodes 4-8
+  fprintf(f, "%16.8e", (y[0]-y[5])/M_PI); //diff nodes 1-6
+  fprintf(f, "%16.8e", (y[2]-y[3])/M_PI); //diff nodes 3-4
+  fprintf(f, "%16.8e", (y[2]-y[1])/M_PI); //diff nodes 3-2
+  fprintf(f, "%16.8e", (y[2]-y[6])/M_PI); //diff nodes 3-7
+  fprintf(f, "%16.8e", (y[5]-y[4])/M_PI); //diff nodes 6-5
+  fprintf(f, "%16.8e", (y[5]-y[7])/M_PI); //diff nodes 6-8
+  fprintf(f, "%16.8e", (y[1]-y[0])/M_PI); //diff nodes 2-1
+  fprintf(f, "%16.8e\n", (y[6]-y[0])/M_PI); //diff nodes 7-1
+}
+
 void runge_kutta(double* omega, double* theta, int *AI, int *AV, double *weights){
   
   double k1[2], k2[2], k3[2], k4[2];
@@ -38,7 +51,7 @@ void runge_kutta(double* omega, double* theta, int *AI, int *AV, double *weights
 
 int main(){
 
-  int steps = 2500;
+  int steps = 2500, printing_step = 2400;
 
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
@@ -62,7 +75,7 @@ int main(){
   
   double sum = 0, max_capacity = 1.73, deltaK = 0.1;
   double cap = weights[5];
-  int iter = 0, printing_step = 2400;
+  int iter = 0;
   
   while (cap < max_capacity){
 
@@ -76,18 +89,9 @@ int main(){
     for (int t=1; t<=steps; t++){
       runge_kutta(omega, theta, AI, AV, weights);
     }
-      
-    fprintf(theta_doc, "%16.8e", (theta[3]-theta[4])/M_PI); //diff nodes 4-5
-    fprintf(theta_doc, "%16.8e", (theta[3]-theta[7])/M_PI); //diff nodes 4-8
-    fprintf(theta_doc, "%16.8e", (theta[0]-theta[5])/M_PI); //diff nodes 1-6
-    fprintf(theta_doc, "%16.8e", (theta[2]-theta[3])/M_PI); //diff nodes 3-4
-    fprintf(theta_doc, "%16.8e", (theta[2]-theta[1])/M_PI); //diff nodes 3-2
-    fprintf(theta_doc, "%16.8e", (theta[2]-theta[6])/M_PI); //diff nodes 3-7
-    fprintf(theta_doc, "%16.8e", (theta[5]-theta[4])/M_PI); //diff nodes 6-5
-    fprintf(theta_doc, "%16.8e", (theta[5]-theta[7])/M_PI); //diff nodes 6-8
-    fprintf(theta_doc, "%16.8e", (theta[1]-theta[0])/M_PI); //diff nodes 2-1
-    fprintf(theta_doc, "%16.8e\n", (theta[6]-theta[0])/M_PI); //diff nodes 7-1
-       
+
+    printer(theta, theta_doc);
+           
     weights[5] += deltaK;
     weights[8] += deltaK;
     iter += 1;

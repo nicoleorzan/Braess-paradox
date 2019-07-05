@@ -70,8 +70,6 @@ int main(){
   //weights[5] = weights[0] * 2;
   //weights[8] = weights[0] * 2;
     
-  // integration using runge-kutta method of 4th order
-
   FILE *theta_doc;
   theta_doc = fopen("theta", "w");
 
@@ -83,14 +81,12 @@ int main(){
 
     runge_kutta(omega, theta, AI, AV, weights);
 
-      
     if (t % printing_step == 0){
       for (int i=0; i<nodes; i++){
 	fprintf(theta_doc, "%16.8e", theta[i]/M_PI);
       }
+      fprintf(theta_doc, "\n");
     }
-      
-    if (t % printing_step == 0) fprintf(theta_doc, "\n");
   }
 
   ctime += TCPU_TIME - tstart;
