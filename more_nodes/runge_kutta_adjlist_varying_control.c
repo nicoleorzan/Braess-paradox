@@ -48,7 +48,7 @@ void runge_kutta(double* omega, double* theta, int internal_step){
 }
 
 
-void stability_check(double* omega, double* theta, bool* unstable){
+void stability_check(double* omega, double* theta, bool* unstable, FILE* control_variation, double max_error){
   
   double theta_save[nodes];
   double error[nodes];
@@ -61,21 +61,20 @@ void stability_check(double* omega, double* theta, bool* unstable){
 
   int additive_steps = 100;
   runge_kutta(omega, theta, additive_steps);
-
   for (int i=0; i<nodes; i++){
     error[i] = fabs(theta_save[i] - theta[i]);
     sum += error[i];
   }
-  if (sum >= 10e-10) {
-    fprintf(stdout, "error =%16.8e\n", sum);
-    fprintf(stdout, "delta =%16.8e\n", delta);
-    fprintf(stdout, "Stability not reached\n");
+  if (sum >= max_error) {
+    fprintf(control_variation, "delta =%16.8e\n", delta);
+    fprintf(control_variation, "error =%16.8e\n", sum);
+    fprintf(control_variation, "Stability not reached\n\n");
     *unstable = 1;
   }
   else {
-    fprintf(stdout, "error =%16.8e\n", sum);
-    fprintf(stdout, "delta =%16.8e\n", delta);
-    fprintf(stdout, "Stability reached\n");
+    fprintf(control_variation, "delta =%16.8e\n", delta);
+    fprintf(control_variation, "error =%16.8e\n", sum);
+    fprintf(control_variation, "Stability reached\n\n");
   }
   
 }
@@ -95,12 +94,20 @@ int main(){
     theta[i] = 0;
     omega[i] = 0;
   }
-    
-  FILE *theta_doc;
-  theta_doc = fopen("control_variation", "w");
+      
+  FILE *control_variation;
+  control_variation = fopen("control_variation", "w");
+  fprintf(control_variation,"control form: Pmax*tanh(delta*theta)\n");
   
-  double delta_step = 0.01, delta_min = 0.7;
+  double delta_step = 0.01, delta_min = 0.5;
   bool unstable = 0;
+  double max_error = 10e-10;
+
+  fprintf(control_variation,"Pmax = %f, variation of delta from %f to %f with step %f\n", Pmax, delta, delta_min, delta_step);
+  fprintf(control_variation, "Computation of stability reached/unreached in every variation of delta with comparison after 25000 and 25100 steps\n");
+  fprintf(control_variation, "Computation is stopped when stability is not reached anymore\n");
+  fprintf(control_variation, "Error is computed as sum_i ( |(theta_old[i] - theta_new[i]| ) \n");
+  fprintf(control_variation, "Stability is not reached if error >= %16.8e\n\n", max_error);
 
   tstart = TCPU_TIME;
 
@@ -115,7 +122,7 @@ int main(){
       runge_kutta(omega, theta, internal_step);
     }
 
-    stability_check(omega, theta, &unstable);
+    stability_check(omega, theta, &unstable, control_variation, max_error);
     if (unstable == 1) break;
     delta = delta - delta_step;
   }
@@ -123,9 +130,9 @@ int main(){
   ctime += TCPU_TIME - tstart;
   printf("%g sec \n", ctime);
 
-  fclose(theta_doc);
-  memset(theta_doc, 0, sizeof(*theta_doc));
-  free(theta_doc);
+  fclose(control_variation);
+  memset(control_variation, 0, sizeof(*control_variation));
+  free(control_variation);
   memset(theta, 0, sizeof(*theta));
   memset(omega, 0, sizeof(*omega));
   free(theta);  free(omega);
