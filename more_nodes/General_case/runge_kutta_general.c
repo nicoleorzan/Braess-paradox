@@ -1,81 +1,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include <math.h>
-#include "../time_computing.h"
+//#include <math.h>
+#include "include/time_computing.h"
+#include "include/network.h"
+#include "include/runge_kutta.h"
 
-#define nodes 8
-#define connections 22 //20 or 22
-#define alpha 1.0
-#define Gamma 0.1
-#define Pmax 1.0
-#define delta 1.0
 #define steps 25000
 #define additive_steps 1000
 #define internal_steps 10
 #define printing_step 10
-#define h 0.001
-#define hh h*0.5
-#define h6 h/6
 #define max_error 10e-10
 
-const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
-//const int AI[nodes+1] = {0, 3, 5, 8, 11, 13, 16, 18, 20};
-const int AI[nodes+1] = {0, 3, 6, 9, 13, 15, 18, 20, 22}; //22 connections
-//const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5};
-const int AV[connections] = {5, 1, 6, 0, 2, 3, 3, 1, 6, 1, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5}; //22 connections
-//double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
-double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03}; //22 connections
-//doubling nodes 3-4 capacity -> double weights in positions 5 and 8
-
-void derivs(double *y, double *dydt){
-
-  double sum = 0;
-
-  for (int i=0; i<nodes; i++){
-    
-    sum = 0;
-    for (int j = AI[i]; j < AI[i+1]; j++){
-	sum += weights[j] * sin( y[i] - y[(AV[j])] );
-      }
-    dydt[i] = y[i+nodes];
-    dydt[i+nodes] = -alpha*y[i+nodes] - Gamma*y[i] + P[i] - sum; //Pmax*tanh(delta*y[i]) + P[i] - sum; //Gamma*y[i] + P[i] - sum;
-    
-  }
-}
-
-void runge_kutta(double* y, double *yt, double *dym, double *dyt, double *dydx){
-
-  for (int t=1; t<=internal_steps; t++){
-    
-    derivs(yt, dydx);
-
-    for (int i=0; i<2*nodes; i++){
-      yt[i] = y[i] + hh*dydx[i];
-    }
-    derivs(yt, dyt);
-  
-    for (int i=0; i<2*nodes; i++){
-      yt[i] = y[i] + hh*dyt[i];
-    }
-    derivs(yt, dym);
-
-    for (int i=0; i<2*nodes; i++) {
-      yt[i] = y[i] + h*dym[i];
-      dym[i] += dyt[i];
-    }
-    derivs(yt, dyt);
-
-    for (int i=0; i<2*nodes; i++) {
-      y[i] = y[i] + h6*(dydx[i]+dyt[i]+2.0*dym[i]);
-      
-    }
-  }
-  
-}
-
-
-void stability_check(double* y, double *yt, double *dym, double *dyt, double *dydx){
+void stability_check(double* y){
   
   double theta_save[nodes];
   double error[nodes];
@@ -86,7 +23,7 @@ void stability_check(double* y, double *yt, double *dym, double *dyt, double *dy
     error[i] = 0.;
   }
 
-  runge_kutta(y, yt, dym, dyt, dydx);
+  runge_kutta(y, internal_steps);
   
   for (int i=0; i<nodes; i++){
     error[i] = fabs(theta_save[i] - y[i]);
@@ -110,16 +47,8 @@ int main(){
   struct timespec ts;
   
   double *y = (double*) malloc(2 * nodes * sizeof(double));
-  double *yt = (double*) malloc(2 * nodes * sizeof(double));
-  double *dym = (double*) malloc(2 * nodes * sizeof(double));
-  double *dyt = (double*) malloc(2 * nodes * sizeof(double));
-  double *dydx = (double*) malloc(2 * nodes * sizeof(double));
   for (int i=0; i<2*nodes; i++){
     y[i] = 0;
-    yt[i] = 0.;
-    dym[i] = 0.;
-    dyt[i] = 0.;
-    dydx[i] = 0.;
   }
 
   FILE* theta_doc;
@@ -129,7 +58,7 @@ int main(){
 
   for (int t=1; t<=steps; t+=internal_steps){
     
-    runge_kutta(y, yt, dym, dyt, dydx);
+    runge_kutta(y, internal_steps);
 
     //printing on file
     fprintf(theta_doc, "%16.8f", t*h);
@@ -140,7 +69,7 @@ int main(){
     
    }
 
-  stability_check(y, yt, dym, dyt, dydx);
+  stability_check(y);
 
   ctime += TCPU_TIME - tstart;
   printf("%g sec \n", ctime);
@@ -150,14 +79,6 @@ int main(){
   free(theta_doc);
   memset(y, 0, sizeof(*y));
   free(y);
-  memset(yt, 0, sizeof(*yt));
-  free(yt);
-  memset(dym, 0, sizeof(*dym));
-  free(dym);
-  memset(dyt, 0, sizeof(*dyt));
-  free(dyt);
-  memset(dydx, 0, sizeof(*dydx));
-  free(dydx);
   
   return 0;
 }

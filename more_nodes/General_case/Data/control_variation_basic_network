@@ -1,0 +1,408 @@
+Usual network with 8 nodes
+control form: Pmax*tanh(delta*theta)
+Pmax = 1.000000, variation of delta from 1.000000 to 0.000000 with step 0.010000
+Computation of stability reached/unreached in every variation of delta with comparison after 50000 and 51000 steps
+Computation is stopped when stability is not reached anymore
+Error is computed as sum_i ( |(theta_50000[i] - theta_51000[i]| ) 
+Stability is not reached if error >=   1.00000000e-09
+
+delta =  1.00000000e+00
+error =  2.83466584e-11
+Stability reached
+
+delta =  9.90000000e-01
+error =  2.25514052e-11
+Stability reached
+
+delta =  9.80000000e-01
+error =  1.61322344e-11
+Stability reached
+
+delta =  9.70000000e-01
+error =  9.19281318e-12
+Stability reached
+
+delta =  9.60000000e-01
+error =  9.90924010e-12
+Stability reached
+
+delta =  9.50000000e-01
+error =  1.20614629e-11
+Stability reached
+
+delta =  9.40000000e-01
+error =  1.53488888e-11
+Stability reached
+
+delta =  9.30000000e-01
+error =  2.26410557e-11
+Stability reached
+
+delta =  9.20000000e-01
+error =  2.93771674e-11
+Stability reached
+
+delta =  9.10000000e-01
+error =  3.53450602e-11
+Stability reached
+
+delta =  9.00000000e-01
+error =  4.03290734e-11
+Stability reached
+
+delta =  8.90000000e-01
+error =  4.41902626e-11
+Stability reached
+
+delta =  8.80000000e-01
+error =  4.67331174e-11
+Stability reached
+
+delta =  8.70000000e-01
+error =  4.83714180e-11
+Stability reached
+
+delta =  8.60000000e-01
+error =  4.90525398e-11
+Stability reached
+
+delta =  8.50000000e-01
+error =  4.82868190e-11
+Stability reached
+
+delta =  8.40000000e-01
+error =  4.60904648e-11
+Stability reached
+
+delta =  8.30000000e-01
+error =  4.24378865e-11
+Stability reached
+
+delta =  8.20000000e-01
+error =  3.74526521e-11
+Stability reached
+
+delta =  8.10000000e-01
+error =  3.11959902e-11
+Stability reached
+
+delta =  8.00000000e-01
+error =  2.38516984e-11
+Stability reached
+
+delta =  7.90000000e-01
+error =  1.56469837e-11
+Stability reached
+
+delta =  7.80000000e-01
+error =  1.42838519e-11
+Stability reached
+
+delta =  7.70000000e-01
+error =  1.73653314e-11
+Stability reached
+
+delta =  7.60000000e-01
+error =  2.22161178e-11
+Stability reached
+
+delta =  7.50000000e-01
+error =  3.06571435e-11
+Stability reached
+
+delta =  7.40000000e-01
+error =  3.79986043e-11
+Stability reached
+
+delta =  7.30000000e-01
+error =  4.39068781e-11
+Stability reached
+
+delta =  7.20000000e-01
+error =  4.80760987e-11
+Stability reached
+
+delta =  7.10000000e-01
+error =  5.02433650e-11
+Stability reached
+
+delta =  7.00000000e-01
+error =  5.02253794e-11
+Stability reached
+
+delta =  6.90000000e-01
+error =  5.00242625e-11
+Stability reached
+
+delta =  6.80000000e-01
+error =  4.87588303e-11
+Stability reached
+
+delta =  6.70000000e-01
+error =  4.54181692e-11
+Stability reached
+
+delta =  6.60000000e-01
+error =  4.01661482e-11
+Stability reached
+
+delta =  6.50000000e-01
+error =  3.31056849e-11
+Stability reached
+
+delta =  6.40000000e-01
+error =  2.45301002e-11
+Stability reached
+
+delta =  6.30000000e-01
+error =  1.86082261e-11
+Stability reached
+
+delta =  6.20000000e-01
+error =  2.31397679e-11
+Stability reached
+
+delta =  6.10000000e-01
+error =  2.84017254e-11
+Stability reached
+
+delta =  6.00000000e-01
+error =  3.83481025e-11
+Stability reached
+
+delta =  5.90000000e-01
+error =  4.63378225e-11
+Stability reached
+
+delta =  5.80000000e-01
+error =  5.18060594e-11
+Stability reached
+
+delta =  5.70000000e-01
+error =  5.42916545e-11
+Stability reached
+
+delta =  5.60000000e-01
+error =  5.34986500e-11
+Stability reached
+
+delta =  5.50000000e-01
+error =  4.92576535e-11
+Stability reached
+
+delta =  5.40000000e-01
+error =  4.49267845e-11
+Stability reached
+
+delta =  5.30000000e-01
+error =  4.09972611e-11
+Stability reached
+
+delta =  5.20000000e-01
+error =  3.45204976e-11
+Stability reached
+
+delta =  5.10000000e-01
+error =  2.59299804e-11
+Stability reached
+
+delta =  5.00000000e-01
+error =  2.69413936e-11
+Stability reached
+
+delta =  4.90000000e-01
+error =  3.30191430e-11
+Stability reached
+
+delta =  4.80000000e-01
+error =  3.94900779e-11
+Stability reached
+
+delta =  4.70000000e-01
+error =  4.97893948e-11
+Stability reached
+
+delta =  4.60000000e-01
+error =  5.62372371e-11
+Stability reached
+
+delta =  4.50000000e-01
+error =  5.80521742e-11
+Stability reached
+
+delta =  4.40000000e-01
+error =  5.47877854e-11
+Stability reached
+
+delta =  4.30000000e-01
+error =  4.63896699e-11
+Stability reached
+
+delta =  4.20000000e-01
+error =  3.48510110e-11
+Stability reached
+
+delta =  4.10000000e-01
+error =  2.88361557e-11
+Stability reached
+
+delta =  4.00000000e-01
+error =  2.79835044e-11
+Stability reached
+
+delta =  3.90000000e-01
+error =  3.89327737e-11
+Stability reached
+
+delta =  3.80000000e-01
+error =  4.64009386e-11
+Stability reached
+
+delta =  3.70000000e-01
+error =  5.16216514e-11
+Stability reached
+
+delta =  3.60000000e-01
+error =  5.89463478e-11
+Stability reached
+
+delta =  3.50000000e-01
+error =  5.90179017e-11
+Stability reached
+
+delta =  3.40000000e-01
+error =  5.12996035e-11
+Stability reached
+
+delta =  3.30000000e-01
+error =  3.62739838e-11
+Stability reached
+
+delta =  3.20000000e-01
+error =  1.96641592e-11
+Stability reached
+
+delta =  3.10000000e-01
+error =  3.55311336e-11
+Stability reached
+
+delta =  3.00000000e-01
+error =  5.13569742e-11
+Stability reached
+
+delta =  2.90000000e-01
+error =  6.01386441e-11
+Stability reached
+
+delta =  2.80000000e-01
+error =  5.94198857e-11
+Stability reached
+
+delta =  2.70000000e-01
+error =  5.73621706e-11
+Stability reached
+
+delta =  2.60000000e-01
+error =  4.43769466e-11
+Stability reached
+
+delta =  2.50000000e-01
+error =  2.13964124e-11
+Stability reached
+
+delta =  2.40000000e-01
+error =  3.16170701e-11
+Stability reached
+
+delta =  2.30000000e-01
+error =  5.68769754e-11
+Stability reached
+
+delta =  2.20000000e-01
+error =  7.03697378e-11
+Stability reached
+
+delta =  2.10000000e-01
+error =  6.67453592e-11
+Stability reached
+
+delta =  2.00000000e-01
+error =  4.44425469e-11
+Stability reached
+
+delta =  1.90000000e-01
+error =  1.43977330e-11
+Stability reached
+
+delta =  1.80000000e-01
+error =  3.47659124e-11
+Stability reached
+
+delta =  1.70000000e-01
+error =  6.74103551e-11
+Stability reached
+
+delta =  1.60000000e-01
+error =  7.62022112e-11
+Stability reached
+
+delta =  1.50000000e-01
+error =  5.32849598e-11
+Stability reached
+
+delta =  1.40000000e-01
+error =  1.27517719e-11
+Stability reached
+
+delta =  1.30000000e-01
+error =  5.05991082e-11
+Stability reached
+
+delta =  1.20000000e-01
+error =  7.68270725e-11
+Stability reached
+
+delta =  1.10000000e-01
+error =  5.32122679e-11
+Stability reached
+
+delta =  1.00000000e-01
+error =  3.21458415e-11
+Stability reached
+
+delta =  9.00000000e-02
+error =  7.70060682e-11
+Stability reached
+
+delta =  8.00000000e-02
+error =  5.36577449e-11
+Stability reached
+
+delta =  7.00000000e-02
+error =  5.65388847e-11
+Stability reached
+
+delta =  6.00000000e-02
+error =  7.17639073e-11
+Stability reached
+
+delta =  5.00000000e-02
+error =  5.77701359e-11
+Stability reached
+
+delta =  4.00000000e-02
+error =  5.39959882e-11
+Stability reached
+
+delta =  3.00000000e-02
+error =  1.14749404e-10
+Stability reached
+
+delta =  2.00000000e-02
+error =  1.38135864e-10
+Stability reached
+
+delta =  1.00000000e-02
+error =  2.85142056e-10
+Stability reached
+
