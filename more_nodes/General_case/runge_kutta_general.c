@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.
+#include <string.h>
 #include "include/time_computing.h"
 #include "include/network.h"
 #include "include/runge_kutta.h"
