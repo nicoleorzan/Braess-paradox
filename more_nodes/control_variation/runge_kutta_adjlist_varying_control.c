@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdbool.h>
-#include "global_vars.h"
+#include "../global_vars.h"
 
 const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
 const int AI[nodes+1] = {0, 3, 5, 8, 11, 13, 16, 18, 20};
