@@ -10,8 +10,8 @@ const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 
 double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
 double delta = 1;
 
-#define steps 25000
-#define additive_steps 100
+#define steps 35000
+#define additive_steps 1000
 #define delta_step 0.01
 #define delta_min 0.5
 #define max_error 10e-10

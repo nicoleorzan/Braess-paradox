@@ -1,95 +1,203 @@
 control form: Pmax*tanh(delta*theta)
 Pmax = 0.100000, variation of delta from 1.000000 to 0.500000 with step 0.010000
-Computation of stability reached/unreached in every variation of delta with comparison after 25000 and 25100 steps
+Computation of stability reached/unreached in every variation of delta with comparison after 35000 and 36000 steps
 Computation is stopped when stability is not reached anymore
-Error is computed as sum_i ( |(theta_25000[i] - theta_25100[i]| ) 
+Error is computed as sum_i ( |(theta_35000[i] - theta_36000[i]| ) 
 Stability is not reached if error >=   1.00000000e-09
 
 delta =  1.00000000e+00
-error =  5.12563672e-10
+error =  1.50213869e-11
 Stability reached
 
 delta =  9.90000000e-01
-error =  5.22497934e-10
+error =  1.54156965e-11
 Stability reached
 
 delta =  9.80000000e-01
-error =  5.33220176e-10
+error =  1.58597580e-11
 Stability reached
 
 delta =  9.70000000e-01
-error =  5.44797929e-10
+error =  1.63451613e-11
 Stability reached
 
 delta =  9.60000000e-01
-error =  5.57298388e-10
+error =  1.69156356e-11
 Stability reached
 
 delta =  9.50000000e-01
-error =  5.70797576e-10
+error =  1.75483794e-11
 Stability reached
 
 delta =  9.40000000e-01
-error =  5.85377261e-10
+error =  1.81711035e-11
 Stability reached
 
 delta =  9.30000000e-01
-error =  6.01129216e-10
+error =  1.88960930e-11
 Stability reached
 
 delta =  9.20000000e-01
-error =  6.18155416e-10
+error =  1.96504479e-11
 Stability reached
 
 delta =  9.10000000e-01
-error =  6.36557709e-10
+error =  2.05404860e-11
 Stability reached
 
 delta =  9.00000000e-01
-error =  6.56483132e-10
+error =  2.14746276e-11
 Stability reached
 
 delta =  8.90000000e-01
-error =  6.78039666e-10
+error =  2.25082869e-11
 Stability reached
 
 delta =  8.80000000e-01
-error =  7.01393388e-10
+error =  2.36302505e-11
 Stability reached
 
 delta =  8.70000000e-01
-error =  7.26708166e-10
+error =  2.48915333e-11
 Stability reached
 
 delta =  8.60000000e-01
-error =  7.54172252e-10
+error =  2.62541933e-11
 Stability reached
 
 delta =  8.50000000e-01
-error =  7.83990955e-10
+error =  2.77650680e-11
 Stability reached
 
 delta =  8.40000000e-01
-error =  8.16395812e-10
+error =  2.94559654e-11
 Stability reached
 
 delta =  8.30000000e-01
-error =  8.51650597e-10
+error =  3.13207932e-11
 Stability reached
 
 delta =  8.20000000e-01
-error =  8.90039355e-10
+error =  3.33707575e-11
 Stability reached
 
 delta =  8.10000000e-01
-error =  9.31891585e-10
+error =  3.56753169e-11
 Stability reached
 
 delta =  8.00000000e-01
-error =  9.77574015e-10
+error =  3.82411533e-11
 Stability reached
 
 delta =  7.90000000e-01
-error =  1.02749199e-09
+error =  4.10980971e-11
+Stability reached
+
+delta =  7.80000000e-01
+error =  4.42921533e-11
+Stability reached
+
+delta =  7.70000000e-01
+error =  4.78978524e-11
+Stability reached
+
+delta =  7.60000000e-01
+error =  5.19384813e-11
+Stability reached
+
+delta =  7.50000000e-01
+error =  5.65015257e-11
+Stability reached
+
+delta =  7.40000000e-01
+error =  6.16540222e-11
+Stability reached
+
+delta =  7.30000000e-01
+error =  6.74944892e-11
+Stability reached
+
+delta =  7.20000000e-01
+error =  7.41299244e-11
+Stability reached
+
+delta =  7.10000000e-01
+error =  8.17068288e-11
+Stability reached
+
+delta =  7.00000000e-01
+error =  9.03482220e-11
+Stability reached
+
+delta =  6.90000000e-01
+error =  1.00259571e-10
+Stability reached
+
+delta =  6.80000000e-01
+error =  1.11643271e-10
+Stability reached
+
+delta =  6.70000000e-01
+error =  1.24769001e-10
+Stability reached
+
+delta =  6.60000000e-01
+error =  1.39941461e-10
+Stability reached
+
+delta =  6.50000000e-01
+error =  1.57537469e-10
+Stability reached
+
+delta =  6.40000000e-01
+error =  1.78022402e-10
+Stability reached
+
+delta =  6.30000000e-01
+error =  2.01920841e-10
+Stability reached
+
+delta =  6.20000000e-01
+error =  2.29912721e-10
+Stability reached
+
+delta =  6.10000000e-01
+error =  2.62799782e-10
+Stability reached
+
+delta =  6.00000000e-01
+error =  3.01575084e-10
+Stability reached
+
+delta =  5.90000000e-01
+error =  3.47441922e-10
+Stability reached
+
+delta =  5.80000000e-01
+error =  4.01893172e-10
+Stability reached
+
+delta =  5.70000000e-01
+error =  4.66757376e-10
+Stability reached
+
+delta =  5.60000000e-01
+error =  5.44296469e-10
+Stability reached
+
+delta =  5.50000000e-01
+error =  6.37329814e-10
+Stability reached
+
+delta =  5.40000000e-01
+error =  7.49351109e-10
+Stability reached
+
+delta =  5.30000000e-01
+error =  8.84724217e-10
+Stability reached
+
+delta =  5.20000000e-01
+error =  1.04891595e-09
 Stability not reached
 

@@ -1,0 +1,95 @@
+control form: Pmax*tanh(delta*theta)
+Pmax = 0.100000, variation of delta from 1.000000 to 0.500000 with step 0.010000
+Computation of stability reached/unreached in every variation of delta with comparison after 25000 and 25100 steps
+Computation is stopped when stability is not reached anymore
+Error is computed as sum_i ( |(theta_25000[i] - theta_25100[i]| ) 
+Stability is not reached if error >=   1.00000000e-09
+
+delta =  1.00000000e+00
+error =  5.12563672e-10
+Stability reached
+
+delta =  9.90000000e-01
+error =  5.22497934e-10
+Stability reached
+
+delta =  9.80000000e-01
+error =  5.33220176e-10
+Stability reached
+
+delta =  9.70000000e-01
+error =  5.44797929e-10
+Stability reached
+
+delta =  9.60000000e-01
+error =  5.57298388e-10
+Stability reached
+
+delta =  9.50000000e-01
+error =  5.70797576e-10
+Stability reached
+
+delta =  9.40000000e-01
+error =  5.85377261e-10
+Stability reached
+
+delta =  9.30000000e-01
+error =  6.01129216e-10
+Stability reached
+
+delta =  9.20000000e-01
+error =  6.18155416e-10
+Stability reached
+
+delta =  9.10000000e-01
+error =  6.36557709e-10
+Stability reached
+
+delta =  9.00000000e-01
+error =  6.56483132e-10
+Stability reached
+
+delta =  8.90000000e-01
+error =  6.78039666e-10
+Stability reached
+
+delta =  8.80000000e-01
+error =  7.01393388e-10
+Stability reached
+
+delta =  8.70000000e-01
+error =  7.26708166e-10
+Stability reached
+
+delta =  8.60000000e-01
+error =  7.54172252e-10
+Stability reached
+
+delta =  8.50000000e-01
+error =  7.83990955e-10
+Stability reached
+
+delta =  8.40000000e-01
+error =  8.16395812e-10
+Stability reached
+
+delta =  8.30000000e-01
+error =  8.51650597e-10
+Stability reached
+
+delta =  8.20000000e-01
+error =  8.90039355e-10
+Stability reached
+
+delta =  8.10000000e-01
+error =  9.31891585e-10
+Stability reached
+
+delta =  8.00000000e-01
+error =  9.77574015e-10
+Stability reached
+
+delta =  7.90000000e-01
+error =  1.02749199e-09
+Stability not reached
+
