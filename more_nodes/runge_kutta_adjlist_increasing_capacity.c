@@ -9,6 +9,7 @@ const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 
 double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
 double delta = 1;
 
+#define Gamma 0
 
 double omega_funct(double omega_old, double theta, double somma, int i){
   return -alpha*omega_old - Gamma*theta + P[i] - somma;

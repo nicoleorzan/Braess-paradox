@@ -11,12 +11,21 @@ double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03*2, 1.03, 1.03,
 //doubling nodes 3-4 capacity -> double weights in positions 5 and 8
 double delta = 1;
 
+#define max_error 10e-10
+#define steps 35000
+#define additive_steps 1000
 
 double omega_funct(double omega_old, double theta, double somma, int i){
   //return -alpha*omega_old - Gamma*theta + P[i] - somma; //Pmax*delta*theta
   return -alpha*omega_old - Pmax*tanh(delta*theta) + P[i] - somma; 
 }
 
+void compute_sum(double* theta, double* sum, int i){
+  *sum = 0;
+  for (int j = AI[i]; j < AI[i+1]; j++){
+    *sum += weights[j] * sin( theta[i] - theta[(AV[j])] ); 
+  }
+}
 
 void runge_kutta(double* omega, double* theta, int internal_step){
 
@@ -27,11 +36,7 @@ void runge_kutta(double* omega, double* theta, int internal_step){
     
     for (int i=0; i<nodes; i++){
 
-      sum = 0;
-      for (int j = AI[i]; j < AI[i+1]; j++){
-	sum += weights[j] * sin( theta[i] - theta[(AV[j])] ); 
-      }
-	
+      compute_sum(theta, &sum, i);	
       k1[0] = omega_funct(omega[i], theta[i], sum, i);
       k1[1] = omega[i];
       k2[0] = omega_funct(omega[i]+k1[0]*hh, theta[i]+k1[1]*hh, sum, i);
@@ -60,14 +65,13 @@ void stability_check(double* omega, double* theta){
     error[i] = 0.;
   }
 
-  int additive_steps = 100;
   runge_kutta(omega, theta, additive_steps);
 
   for (int i=0; i<nodes; i++){
     error[i] = fabs(theta_save[i] - theta[i]);
     sum += error[i];
   }
-  if (sum >= 10e-7) {
+  if (sum >= max_error) {
     fprintf(stdout, "error =%16.8e\n", sum);
     fprintf(stdout, "Stability not reached\n");
   }
@@ -86,7 +90,7 @@ int main(){
   double tstart, tstop, ctime = 0;
   struct timespec ts;
   
-  int steps = 2500, internal_step = 10, printing_step = 10;
+  int internal_step = 10, printing_step = 10;
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
   for (int i=0; i<nodes; i++){

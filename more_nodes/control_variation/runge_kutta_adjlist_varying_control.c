@@ -10,11 +10,18 @@ const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 
 double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
 double delta = 1;
 
+#define alpha 1.0
+#define Pmax 0.1
 #define steps 35000
 #define additive_steps 1000
+#define internal_step 10
+#define max_error 10e-10
+#define h 0.01
+#define hh h*0.5
+#define h6 h/6
+
 #define delta_step 0.01
 #define delta_min 0.5
-#define max_error 10e-10
 
 double omega_funct(double omega_old, double theta, double somma, int i){
   //return -alpha*omega_old - Pmax*delta*theta + P[i] - somma;
@@ -22,12 +29,12 @@ double omega_funct(double omega_old, double theta, double somma, int i){
 }
 
 
-void runge_kutta(double* omega, double* theta, int internal_step){
+void runge_kutta(double* omega, double* theta, int rk_step){
 
   double k1[2], k2[2], k3[2], k4[2];
   double sum = 0;
     
-  for (int t=0; t<internal_step; t++){
+  for (int t=0; t<rk_step; t++){
     
     for (int i=0; i<nodes; i++){
 
@@ -90,7 +97,6 @@ int main(){
   double tstart, tstop, ctime = 0;
   struct timespec ts;
   
-  int internal_step = 10;
   double *theta = (double*) malloc(nodes * sizeof(double));
   double *omega = (double*) malloc(nodes * sizeof(double));
   for (int i=0; i<nodes; i++){
