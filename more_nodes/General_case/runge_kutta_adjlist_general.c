@@ -2,15 +2,15 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "global_vars.h"
+#include "../time_computing.h"
 
 #define nodes 8
-#define connections 22 //20 or 22
+#define connections 20 //20 or 22
 #define alpha 1.0
 #define Gamma 0.1
-#define Pmax 0.1
-#define delta 1
-#define steps 100000
+#define Pmax 1.0
+#define delta 1.0
+#define steps 50000
 #define additive_steps 1000
 #define internal_steps 10
 #define printing_step 10
@@ -20,14 +20,13 @@
 #define max_error 10e-10
 
 const double P[nodes] = {-1, 1, 1, 1, -1, -1, 1, -1};
-//const int AI[nodes+1] = {0, 3, 5, 8, 11, 13, 16, 18, 20};
-const int AI[nodes+1] = {0, 3, 6, 9, 12, 14, 17, 19, 22}; //22 connections
-//const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5};
-const int AV[connections] = {5, 1, 6, 0, 2, 3, 3, 1, 6, 1, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5}; //22 connections
-//double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
-double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03}; //22 connections
+const int AI[nodes+1] = {0, 3, 5, 8, 11, 13, 16, 18, 20};
+//const int AI[nodes+1] = {0, 3, 6, 9, 12, 14, 17, 19, 22}; //22 connections
+const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5};
+//const int AV[connections] = {5, 1, 6, 0, 2, 3, 3, 1, 6, 1, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5}; //22 connections
+double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03*2, 1.03, 1.03, 1.03*2, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
+//double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03}; //22 connections
 //doubling nodes 3-4 capacity -> double weights in positions 5 and 8
-
 
 void derivs(double *y, double *dydt){
 

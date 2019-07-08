@@ -1,0 +1,408 @@
+Usual network with 8 nodes
+control form: Pmax*tanh(delta*theta)
+Pmax = 1.000000, variation of delta from 1.000000 to 0.000000 with step 0.010000
+Computation of stability reached/unreached in every variation of delta with comparison after 50000 and 51000 steps
+Computation is stopped when stability is not reached anymore
+Error is computed as sum_i ( |(theta_50000[i] - theta_51000[i]| ) 
+Stability is not reached if error >=   1.00000000e-09
+
+delta =  1.00000000e+00
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.90000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.80000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.70000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.60000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.50000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.40000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.30000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.20000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.10000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.00000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.90000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.80000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.70000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.60000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.50000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.40000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.30000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.20000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.10000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.00000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.90000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.80000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.70000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.60000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.50000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.40000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.30000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.20000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.10000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.00000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.90000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.80000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.70000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.60000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.50000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.40000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.30000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.20000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.10000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.00000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.90000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.80000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.70000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.60000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.50000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.40000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.30000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.20000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.10000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.00000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.90000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.80000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.70000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.60000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.50000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.40000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.30000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.20000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.10000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.00000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.90000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.80000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.70000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.60000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.50000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.40000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.30000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.20000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.10000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.00000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  2.90000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  2.80000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  2.70000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  2.60000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  2.50000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  2.40000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  2.30000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  2.20000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  2.10000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  2.00000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  1.90000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  1.80000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  1.70000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  1.60000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  1.50000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  1.40000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  1.30000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  1.20000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  1.10000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  1.00000000e-01
+error =  0.00000000e+00
+Stability reached
+
+delta =  9.00000000e-02
+error =  0.00000000e+00
+Stability reached
+
+delta =  8.00000000e-02
+error =  0.00000000e+00
+Stability reached
+
+delta =  7.00000000e-02
+error =  0.00000000e+00
+Stability reached
+
+delta =  6.00000000e-02
+error =  0.00000000e+00
+Stability reached
+
+delta =  5.00000000e-02
+error =  0.00000000e+00
+Stability reached
+
+delta =  4.00000000e-02
+error =  0.00000000e+00
+Stability reached
+
+delta =  3.00000000e-02
+error =  1.21750110e-11
+Stability reached
+
+delta =  2.00000000e-02
+error =  8.13196080e-10
+Stability reached
+
+delta =  1.00000000e-02
+error =  5.51552165e-06
+Stability not reached
+
