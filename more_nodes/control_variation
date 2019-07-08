@@ -2,7 +2,7 @@ control form: Pmax*tanh(delta*theta)
 Pmax = 0.100000, variation of delta from 1.000000 to 0.500000 with step 0.010000
 Computation of stability reached/unreached in every variation of delta with comparison after 25000 and 25100 steps
 Computation is stopped when stability is not reached anymore
-Error is computed as sum_i ( |(theta_old[i] - theta_new[i]| ) 
+Error is computed as sum_i ( |(theta_25000[i] - theta_25100[i]| ) 
 Stability is not reached if error >=   1.00000000e-09
 
 delta =  1.00000000e+00
