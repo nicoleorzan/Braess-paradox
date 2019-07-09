@@ -3,7 +3,7 @@
 
 #include <math.h>
 
-#define h 0.001
+#define h 0.01
 #define hh h*0.5
 #define h6 h/6
 

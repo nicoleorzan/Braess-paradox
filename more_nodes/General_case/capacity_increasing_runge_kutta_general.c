@@ -11,7 +11,7 @@
 #define max_error 10e-10
 
 #define max_capacity 1.73
-#define deltaK 0.1
+#define deltaK 0.01
 
 
 void stability_check(double* y){

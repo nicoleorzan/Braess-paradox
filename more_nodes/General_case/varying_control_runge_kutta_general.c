@@ -9,7 +9,7 @@
 #define steps 50000
 #define additive_steps 1000
 #define internal_steps 10
-#define max_error 10e-7
+#define max_error 10e-4
 
 #define Pmin 0.0
 #define Pstep 0.01
@@ -23,6 +23,20 @@ void print_info(FILE *file){
   fprintf(file, "Computation is stopped when stability is not reached anymore\n");
   fprintf(file, "Error is computed as sum_i ( |(theta_%i[i] - theta_%i[i]| ) \n", steps, steps+additive_steps);
   fprintf(file, "Stability is not reached if error >= %16.8e\n\n", max_error);
+}
+
+void printer(double * y, FILE * f){
+  fprintf(f, "%16.8e", (y[3]-y[4])/M_PI); //diff nodes 4-5
+  fprintf(f, "%16.8e", (y[3]-y[7])/M_PI); //diff nodes 4-8
+  fprintf(f, "%16.8e", (y[0]-y[5])/M_PI); //diff nodes 1-6
+  fprintf(f, "%16.8e", (y[2]-y[3])/M_PI); //diff nodes 3-4
+  fprintf(f, "%16.8e", (y[2]-y[1])/M_PI); //diff nodes 3-2
+  fprintf(f, "%16.8e", (y[2]-y[6])/M_PI); //diff nodes 3-7
+  fprintf(f, "%16.8e", (y[5]-y[4])/M_PI); //diff nodes 6-5
+  fprintf(f, "%16.8e", (y[5]-y[7])/M_PI); //diff nodes 6-8
+  fprintf(f, "%16.8e", (y[1]-y[0])/M_PI); //diff nodes 2-1
+  fprintf(f, "%16.8e", (y[6]-y[0])/M_PI); //diff nodes 7-1
+  fprintf(f, "\n");
 }
 
 void stability_check(double* y, bool *unstable, FILE* file){
@@ -68,40 +82,39 @@ int main(){
   
   double *y = (double*) malloc(2 * nodes * sizeof(double));
 
-  FILE* file, * f2, * f3;
+  FILE* file, * f3, * f4;
   file = fopen("control_variation", "w");
   print_info(file);
-  
-  f2 = fopen("Pmax_delta", "w");
+
   f3 = fopen("theta_varying_Pmax", "w");
-  fprintf(f2, "Pmax       delta\n");
-   
+  f4 = fopen("theta", "w");
+ 
   tstart = TCPU_TIME;
 
   Pmax = 1.0;
   delta = 0.1/Pmax;
 
   while (Pmax >= Pmin){
+    fprintf(stdout, "Pmax=%f\n", Pmax);
     for (int i=0; i<2*nodes; i++){
       y[i] = 0;
     }
     fprintf(f3, "%16.8e ", Pmax);
+    fprintf(f4, "%16.8e ", Pmax);
   
     for (int t=1; t<=steps; t+=internal_steps){
       runge_kutta(y, internal_steps);
     }
-    fprintf(f2, "%16.8e %16.8e\n", Pmax, delta);
 
     for (int i=0; i<nodes; i++){
       fprintf(f3, "%16.8e ", y[i]/M_PI);
     }
     fprintf(f3, "\n");
+    printer(y, f4);
     
     stability_check(y, &unstable, file);
-    
-    /*if (unstable == 1) {
-      break;
-      }*/
+
+    if (unstable == 1)  break;
 
     Pmax = Pmax - Pstep;
     delta = 0.1/Pmax;
@@ -113,12 +126,12 @@ int main(){
   fclose(file);
   memset(file, 0, sizeof(*file));
   free(file);
-  fclose(f2);
-  memset(f2, 0, sizeof(*f2));
-  free(f2);
   fclose(f3);
   memset(f3, 0, sizeof(*f3));
   free(f3);
+  fclose(f4);
+  memset(f4, 0, sizeof(*f4));
+  free(f4);
   memset(y, 0, sizeof(*y));
   free(y);
   
