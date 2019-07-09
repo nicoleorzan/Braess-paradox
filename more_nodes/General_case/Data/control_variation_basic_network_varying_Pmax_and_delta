@@ -1,0 +1,609 @@
+Usual network with 8 nodes
+control form: Pmax*tanh(delta*theta)
+variation of Pmax from 1.000000 to 0.000000 with step 0.010000
+and modifying delta as 0.1/Pmax to keep slope stable to 0.1 (in approx) 
+Computation of stability reached/unreached in every variation of Pmax with comparison after 50000 and 51000 steps
+Computation is stopped when stability is not reached anymore
+Error is computed as sum_i ( |(theta_50000[i] - theta_51000[i]| ) 
+Stability is not reached if error >=   1.00000000e-06
+
+Pmax =  1.00000000e+00
+delta =  1.00000000e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.21462301e-11
+Stability reached
+
+Pmax =  9.90000000e-01
+delta =  1.01010101e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.22355753e-11
+Stability reached
+
+Pmax =  9.80000000e-01
+delta =  1.02040816e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.23230609e-11
+Stability reached
+
+Pmax =  9.70000000e-01
+delta =  1.03092784e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.24204830e-11
+Stability reached
+
+Pmax =  9.60000000e-01
+delta =  1.04166667e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.25310889e-11
+Stability reached
+
+Pmax =  9.50000000e-01
+delta =  1.05263158e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.26341176e-11
+Stability reached
+
+Pmax =  9.40000000e-01
+delta =  1.06382979e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.27483596e-11
+Stability reached
+
+Pmax =  9.30000000e-01
+delta =  1.07526882e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.28819333e-11
+Stability reached
+
+Pmax =  9.20000000e-01
+delta =  1.08695652e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.29896666e-11
+Stability reached
+
+Pmax =  9.10000000e-01
+delta =  1.09890110e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.30988292e-11
+Stability reached
+
+Pmax =  9.00000000e-01
+delta =  1.11111111e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.32207040e-11
+Stability reached
+
+Pmax =  8.90000000e-01
+delta =  1.12359551e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.33414407e-11
+Stability reached
+
+Pmax =  8.80000000e-01
+delta =  1.13636364e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.34666184e-11
+Stability reached
+
+Pmax =  8.70000000e-01
+delta =  1.14942529e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.35978745e-11
+Stability reached
+
+Pmax =  8.60000000e-01
+delta =  1.16279070e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.37428835e-11
+Stability reached
+
+Pmax =  8.50000000e-01
+delta =  1.17647059e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.39045736e-11
+Stability reached
+
+Pmax =  8.40000000e-01
+delta =  1.19047619e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.40375506e-11
+Stability reached
+
+Pmax =  8.30000000e-01
+delta =  1.20481928e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.41910389e-11
+Stability reached
+
+Pmax =  8.20000000e-01
+delta =  1.21951220e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.43466089e-11
+Stability reached
+
+Pmax =  8.10000000e-01
+delta =  1.23456790e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.45116158e-11
+Stability reached
+
+Pmax =  8.00000000e-01
+delta =  1.25000000e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.46933038e-11
+Stability reached
+
+Pmax =  7.90000000e-01
+delta =  1.26582278e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.48891194e-11
+Stability reached
+
+Pmax =  7.80000000e-01
+delta =  1.28205128e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.50692531e-11
+Stability reached
+
+Pmax =  7.70000000e-01
+delta =  1.29870130e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.52500251e-11
+Stability reached
+
+Pmax =  7.60000000e-01
+delta =  1.31578947e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.54383189e-11
+Stability reached
+
+Pmax =  7.50000000e-01
+delta =  1.33333333e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.56481233e-11
+Stability reached
+
+Pmax =  7.40000000e-01
+delta =  1.35135135e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.58865992e-11
+Stability reached
+
+Pmax =  7.30000000e-01
+delta =  1.36986301e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.60940583e-11
+Stability reached
+
+Pmax =  7.20000000e-01
+delta =  1.38888889e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.63107877e-11
+Stability reached
+
+Pmax =  7.10000000e-01
+delta =  1.40845070e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.65572295e-11
+Stability reached
+
+Pmax =  7.00000000e-01
+delta =  1.42857143e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.68269859e-11
+Stability reached
+
+Pmax =  6.90000000e-01
+delta =  1.44927536e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.70823372e-11
+Stability reached
+
+Pmax =  6.80000000e-01
+delta =  1.47058824e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.73393538e-11
+Stability reached
+
+Pmax =  6.70000000e-01
+delta =  1.49253731e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.76236819e-11
+Stability reached
+
+Pmax =  6.60000000e-01
+delta =  1.51515152e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.79440368e-11
+Stability reached
+
+Pmax =  6.50000000e-01
+delta =  1.53846154e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.82490983e-11
+Stability reached
+
+Pmax =  6.40000000e-01
+delta =  1.56250000e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.85607102e-11
+Stability reached
+
+Pmax =  6.30000000e-01
+delta =  1.58730159e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.89233645e-11
+Stability reached
+
+Pmax =  6.20000000e-01
+delta =  1.61290323e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.92531563e-11
+Stability reached
+
+Pmax =  6.10000000e-01
+delta =  1.63934426e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.96261912e-11
+Stability reached
+
+Pmax =  6.00000000e-01
+delta =  1.66666667e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.00261491e-11
+Stability reached
+
+Pmax =  5.90000000e-01
+delta =  1.69491525e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.04204309e-11
+Stability reached
+
+Pmax =  5.80000000e-01
+delta =  1.72413793e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.08632433e-11
+Stability reached
+
+Pmax =  5.70000000e-01
+delta =  1.75438596e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.12909706e-11
+Stability reached
+
+Pmax =  5.60000000e-01
+delta =  1.78571429e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.17866852e-11
+Stability reached
+
+Pmax =  5.50000000e-01
+delta =  1.81818182e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.22537838e-11
+Stability reached
+
+Pmax =  5.40000000e-01
+delta =  1.85185185e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.27856084e-11
+Stability reached
+
+Pmax =  5.30000000e-01
+delta =  1.88679245e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.33164615e-11
+Stability reached
+
+Pmax =  5.20000000e-01
+delta =  1.92307692e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.38973718e-11
+Stability reached
+
+Pmax =  5.10000000e-01
+delta =  1.96078431e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.45092990e-11
+Stability reached
+
+Pmax =  5.00000000e-01
+delta =  2.00000000e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.51265414e-11
+Stability reached
+
+Pmax =  4.90000000e-01
+delta =  2.04081633e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.57952565e-11
+Stability reached
+
+Pmax =  4.80000000e-01
+delta =  2.08333333e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.65083527e-11
+Stability reached
+
+Pmax =  4.70000000e-01
+delta =  2.12765957e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.72640815e-11
+Stability reached
+
+Pmax =  4.60000000e-01
+delta =  2.17391304e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.80527562e-11
+Stability reached
+
+Pmax =  4.50000000e-01
+delta =  2.22222222e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.88792340e-11
+Stability reached
+
+Pmax =  4.40000000e-01
+delta =  2.27272727e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.97665797e-11
+Stability reached
+
+Pmax =  4.30000000e-01
+delta =  2.32558140e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  5.06883979e-11
+Stability reached
+
+Pmax =  4.20000000e-01
+delta =  2.38095238e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  5.16645060e-11
+Stability reached
+
+Pmax =  4.10000000e-01
+delta =  2.43902439e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  5.26899357e-11
+Stability reached
+
+Pmax =  4.00000000e-01
+delta =  2.50000000e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  5.38123990e-11
+Stability reached
+
+Pmax =  3.90000000e-01
+delta =  2.56410256e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  5.49638668e-11
+Stability reached
+
+Pmax =  3.80000000e-01
+delta =  2.63157895e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  5.62037916e-11
+Stability reached
+
+Pmax =  3.70000000e-01
+delta =  2.70270270e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  5.75164916e-11
+Stability reached
+
+Pmax =  3.60000000e-01
+delta =  2.77777778e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  5.89019111e-11
+Stability reached
+
+Pmax =  3.50000000e-01
+delta =  2.85714286e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  6.03409545e-11
+Stability reached
+
+Pmax =  3.40000000e-01
+delta =  2.94117647e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  6.18557428e-11
+Stability reached
+
+Pmax =  3.30000000e-01
+delta =  3.03030303e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  6.34780561e-11
+Stability reached
+
+Pmax =  3.20000000e-01
+delta =  3.12500000e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  6.51741994e-11
+Stability reached
+
+Pmax =  3.10000000e-01
+delta =  3.22580645e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  6.69175826e-11
+Stability reached
+
+Pmax =  3.00000000e-01
+delta =  3.33333333e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  6.87128132e-11
+Stability reached
+
+Pmax =  2.90000000e-01
+delta =  3.44827586e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  7.05837333e-11
+Stability reached
+
+Pmax =  2.80000000e-01
+delta =  3.57142857e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  7.24954541e-11
+Stability reached
+
+Pmax =  2.70000000e-01
+delta =  3.70370370e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  7.43271555e-11
+Stability reached
+
+Pmax =  2.60000000e-01
+delta =  3.84615385e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  7.61066765e-11
+Stability reached
+
+Pmax =  2.50000000e-01
+delta =  4.00000000e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  7.77723164e-11
+Stability reached
+
+Pmax =  2.40000000e-01
+delta =  4.16666667e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  7.91740840e-11
+Stability reached
+
+Pmax =  2.30000000e-01
+delta =  4.34782609e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  8.01843036e-11
+Stability reached
+
+Pmax =  2.20000000e-01
+delta =  4.54545455e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  8.05623901e-11
+Stability reached
+
+Pmax =  2.10000000e-01
+delta =  4.76190476e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  8.00646771e-11
+Stability reached
+
+Pmax =  2.00000000e-01
+delta =  5.00000000e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  7.81985587e-11
+Stability reached
+
+Pmax =  1.90000000e-01
+delta =  5.26315789e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  7.45000728e-11
+Stability reached
+
+Pmax =  1.80000000e-01
+delta =  5.55555556e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  6.82560952e-11
+Stability reached
+
+Pmax =  1.70000000e-01
+delta =  5.88235294e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  5.85563542e-11
+Stability reached
+
+Pmax =  1.60000000e-01
+delta =  6.25000000e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.58601490e-11
+Stability reached
+
+Pmax =  1.50000000e-01
+delta =  6.66666667e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.36871087e-11
+Stability reached
+
+Pmax =  1.40000000e-01
+delta =  7.14285714e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  2.20523044e-11
+Stability reached
+
+Pmax =  1.30000000e-01
+delta =  7.69230769e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  3.69929087e-11
+Stability reached
+
+Pmax =  1.20000000e-01
+delta =  8.33333333e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  6.45828391e-11
+Stability reached
+
+Pmax =  1.10000000e-01
+delta =  9.09090909e-01
+slope (Pmax*delta) =  1.00000000e-01
+error =  8.85695961e-11
+Stability reached
+
+Pmax =  1.00000000e-01
+delta =  1.00000000e+00
+slope (Pmax*delta) =  1.00000000e-01
+error =  8.80657491e-11
+Stability reached
+
+Pmax =  9.00000000e-02
+delta =  1.11111111e+00
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.57472948e-11
+Stability reached
+
+Pmax =  8.00000000e-02
+delta =  1.25000000e+00
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.05459277e-11
+Stability reached
+
+Pmax =  7.00000000e-02
+delta =  1.42857143e+00
+slope (Pmax*delta) =  1.00000000e-01
+error =  9.11609399e-11
+Stability reached
+
+Pmax =  6.00000000e-02
+delta =  1.66666667e+00
+slope (Pmax*delta) =  1.00000000e-01
+error =  4.00423722e-11
+Stability reached
+
+Pmax =  5.00000000e-02
+delta =  2.00000000e+00
+slope (Pmax*delta) =  1.00000000e-01
+error =  9.05139436e-11
+Stability reached
+
+Pmax =  4.00000000e-02
+delta =  2.50000000e+00
+slope (Pmax*delta) =  1.00000000e-01
+error =  1.78974890e-11
+Stability reached
+
+Pmax =  3.00000000e-02
+delta =  3.33333333e+00
+slope (Pmax*delta) =  1.00000000e-01
+error =  1.09315501e-10
+Stability reached
+
+Pmax =  2.00000000e-02
+delta =  5.00000000e+00
+slope (Pmax*delta) =  1.00000000e-01
+error =  1.65861956e-10
+Stability reached
+
+Pmax =  1.00000000e-02
+delta =  1.00000000e+01
+slope (Pmax*delta) =  1.00000000e-01
+error =  1.73189876e-09
+Stability reached
+

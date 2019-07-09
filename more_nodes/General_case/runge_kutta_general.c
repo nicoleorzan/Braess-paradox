@@ -5,11 +5,11 @@
 #include "include/network.h"
 #include "include/runge_kutta.h"
 
-#define steps 25000
+#define steps 50000
 #define additive_steps 1000
 #define internal_steps 10
 #define printing_step 10
-#define max_error 10e-10
+#define max_error 10e-7
 
 void stability_check(double* y){
   
