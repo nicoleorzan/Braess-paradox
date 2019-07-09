@@ -9,23 +9,27 @@
 #define steps 50000
 #define additive_steps 1000
 #define internal_steps 10
-#define max_error 10e-4
+#define max_error 10e-10
 
 #define Pmin 0.0
 #define Pstep 0.01
+#define delta_min 0.0
+#define delta_step 0.01
 
 void print_info(FILE *file){
-  fprintf(file, "Usual network with 8 nodes\n");
   fprintf(file, "control form: Pmax*tanh(delta*theta)\n");
-  fprintf(file, "variation of Pmax from %f to %f with step %f\n", Pmax, Pmin, Pstep);
-  fprintf(file, "and modifying delta as 0.1/Pmax to keep slope stable to 0.1 (in approx) \n");
-  fprintf(file, "Computation of stability reached/unreached in every variation of Pmax with comparison after %i and %i steps\n", steps, steps+additive_steps);
+  //fprintf(file, "variation of Pmax from %f to %f with step %f\n", Pmax, Pmin, Pstep);
+  fprintf(file, "variation of delta from %f to %f with step %f\n", delta, delta_min, delta_step);
+  //fprintf(file, "and modifying delta as 0.1/Pmax to keep slope stable to 0.1 (in approx) \n");
+  fprintf(file, "and modifying Pmax as 0.1/delta to keep slope stable to 0.1 (in approx) \n");
+  fprintf(file, "Computation of stability reached/unreached in every variables update with comparison after %i and %i steps\n", steps, steps+additive_steps);
   fprintf(file, "Computation is stopped when stability is not reached anymore\n");
   fprintf(file, "Error is computed as sum_i ( |(theta_%i[i] - theta_%i[i]| ) \n", steps, steps+additive_steps);
   fprintf(file, "Stability is not reached if error >= %16.8e\n\n", max_error);
 }
 
 void printer(double * y, FILE * f){
+  fprintf(f, "%16.8e ", delta);
   fprintf(f, "%16.8e", (y[3]-y[4])/M_PI); //diff nodes 4-5
   fprintf(f, "%16.8e", (y[3]-y[7])/M_PI); //diff nodes 4-8
   fprintf(f, "%16.8e", (y[0]-y[5])/M_PI); //diff nodes 1-6
@@ -81,43 +85,40 @@ int main(){
   bool unstable = 0;
   
   double *y = (double*) malloc(2 * nodes * sizeof(double));
+  for (int i=0; i<2*nodes; i++){
+    y[i] = 0;
+  }
 
-  FILE* file, * f3, * f4;
+  FILE* file, * f;
   file = fopen("control_variation", "w");
   print_info(file);
 
-  f3 = fopen("theta_varying_Pmax", "w");
-  f4 = fopen("theta", "w");
+  f = fopen("theta", "w");
  
   tstart = TCPU_TIME;
 
-  Pmax = 1.0;
-  delta = 0.1/Pmax;
+  //Pmax = 1.0;
+  //delta = 0.1/Pmax;
 
-  while (Pmax >= Pmin){
-    fprintf(stdout, "Pmax=%f\n", Pmax);
-    for (int i=0; i<2*nodes; i++){
-      y[i] = 0;
-    }
-    fprintf(f3, "%16.8e ", Pmax);
-    fprintf(f4, "%16.8e ", Pmax);
-  
+  delta = 1.0;
+  Pmax = 0.1/delta;
+
+  //while (Pmax >= Pmin){
+  while (delta >= delta_min){
     for (int t=1; t<=steps; t+=internal_steps){
       runge_kutta(y, internal_steps);
     }
 
-    for (int i=0; i<nodes; i++){
-      fprintf(f3, "%16.8e ", y[i]/M_PI);
-    }
-    fprintf(f3, "\n");
-    printer(y, f4);
+    printer(y, f);
     
     stability_check(y, &unstable, file);
 
-    if (unstable == 1)  break;
+    //if (unstable == 1)  break;
 
-    Pmax = Pmax - Pstep;
-    delta = 0.1/Pmax;
+    //Pmax = Pmax - Pstep;
+    //delta = 0.1/Pmax;
+    delta = delta - delta_step;
+    Pmax = 0.1/delta;
   }
 
   ctime += TCPU_TIME - tstart;
@@ -126,12 +127,9 @@ int main(){
   fclose(file);
   memset(file, 0, sizeof(*file));
   free(file);
-  fclose(f3);
-  memset(f3, 0, sizeof(*f3));
-  free(f3);
-  fclose(f4);
-  memset(f4, 0, sizeof(*f4));
-  free(f4);
+  fclose(f);
+  memset(f, 0, sizeof(*f));
+  free(f);
   memset(y, 0, sizeof(*y));
   free(y);
   
