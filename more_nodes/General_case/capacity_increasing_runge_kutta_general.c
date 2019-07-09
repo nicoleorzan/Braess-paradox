@@ -69,19 +69,19 @@ int main(){
   capacity_doc = fopen("increasing_capacity", "w");
 
   tstart = TCPU_TIME;
- 
+
+  for (int i=0; i<2*nodes; i++){
+    y[i] = 0;
+  }
+
   while (cap < max_capacity){
     fprintf(stdout, "%f\n", cap);
     fprintf(capacity_doc, "%16.8f", deltaK*iter);
-    
-    for (int i=0; i<2*nodes; i++){
-      y[i] = 0;
-    }
 
     for (int t=1; t<=steps; t+=internal_steps){  
       runge_kutta(y, internal_steps);
     }
-    //stability_check(y, yt, dym, dyt, dydx);
+    stability_check(y);
 
     printer(y, capacity_doc);
 
@@ -89,6 +89,11 @@ int main(){
     weights[8] += deltaK;
     iter += 1;
     cap += deltaK;
+    /*fprintf(stdout, "%16.8e \n", weights[5]);
+    for (int i=0; i<2*nodes; i++){
+      fprintf(stdout, "%16.8e ", y[i]);
+    }
+    fprintf(stdout, "\n");*/
   }
 
   ctime += TCPU_TIME - tstart;

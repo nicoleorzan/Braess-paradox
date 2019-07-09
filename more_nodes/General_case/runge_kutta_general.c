@@ -5,7 +5,7 @@
 #include "include/network.h"
 #include "include/runge_kutta.h"
 
-#define steps 50000
+#define steps 25000
 #define additive_steps 1000
 #define internal_steps 10
 #define printing_step 10
@@ -49,6 +49,11 @@ int main(){
   for (int i=0; i<2*nodes; i++){
     y[i] = 0;
   }
+  /*for (int i=0; i<2*nodes; i++){
+    weights[i] = 1.68;
+    }*/
+  //weights[5] = 1.68*2;
+  //weights[8] = 1.68*2;
 
   FILE* theta_doc;
   theta_doc = fopen("theta", "w");
@@ -61,8 +66,11 @@ int main(){
 
     //printing on file
     fprintf(theta_doc, "%16.8f", t*h);
-    for (int i=0; i<nodes; i++){
+    /*for (int i=0; i<nodes; i++){
       fprintf(theta_doc, "%16.8e", y[i]/M_PI);
+      }*/
+    for (int i=0; i<2*nodes; i++){
+      fprintf(theta_doc, "%16.8e", y[i]);
     }
     fprintf(theta_doc, "\n");
     
