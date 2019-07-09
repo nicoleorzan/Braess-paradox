@@ -13,14 +13,10 @@
 
 #define Pmin 0.0
 #define Pstep 0.01
-#define delta_min 0.0
-#define delta_step 0.01
 
 void print_info(FILE *file){
   fprintf(file, "control form: Pmax*tanh(delta*theta)\n");
-  //fprintf(file, "variation of Pmax from %f to %f with step %f\n", Pmax, Pmin, Pstep);
-  fprintf(file, "variation of delta from %f to %f with step %f\n", delta, delta_min, delta_step);
-  //fprintf(file, "and modifying delta as 0.1/Pmax to keep slope stable to 0.1 (in approx) \n");
+  fprintf(file, "variation of Pmax from %f to %f with step %f\n", Pmax, Pmin, Pstep);
   fprintf(file, "and modifying Pmax as 0.1/delta to keep slope stable to 0.1 (in approx) \n");
   fprintf(file, "Computation of stability reached/unreached in every variables update with comparison after %i and %i steps\n", steps, steps+additive_steps);
   fprintf(file, "Computation is stopped when stability is not reached anymore\n");
@@ -29,7 +25,7 @@ void print_info(FILE *file){
 }
 
 void printer(double * y, FILE * f){
-  fprintf(f, "%16.8e ", delta);
+  fprintf(f, "%16.8e ", Pmax);
   fprintf(f, "%16.8e", (y[3]-y[4])/M_PI); //diff nodes 4-5
   fprintf(f, "%16.8e", (y[3]-y[7])/M_PI); //diff nodes 4-8
   fprintf(f, "%16.8e", (y[0]-y[5])/M_PI); //diff nodes 1-6
@@ -97,14 +93,10 @@ int main(){
  
   tstart = TCPU_TIME;
 
-  //Pmax = 1.0;
-  //delta = 0.1/Pmax;
+  Pmax = 1.0;
+  delta = 0.1/Pmax;
 
-  delta = 1.0;
-  Pmax = 0.1/delta;
-
-  //while (Pmax >= Pmin){
-  while (delta >= delta_min){
+  while (Pmax >= Pmin){
     for (int t=1; t<=steps; t+=internal_steps){
       runge_kutta(y, internal_steps);
     }
@@ -115,10 +107,8 @@ int main(){
 
     //if (unstable == 1)  break;
 
-    //Pmax = Pmax - Pstep;
-    //delta = 0.1/Pmax;
-    delta = delta - delta_step;
-    Pmax = 0.1/delta;
+    Pmax = Pmax - Pstep;
+    delta = 0.1/Pmax;
   }
 
   ctime += TCPU_TIME - tstart;
