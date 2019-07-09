@@ -68,12 +68,12 @@ int main(){
   
   double *y = (double*) malloc(2 * nodes * sizeof(double));
 
-  FILE* file;
-  FILE* f2;
+  FILE* file, * f2, * f3;
   file = fopen("control_variation", "w");
   print_info(file);
   
   f2 = fopen("Pmax_delta", "w");
+  f3 = fopen("theta_varying_Pmax", "w");
   fprintf(f2, "Pmax       delta\n");
    
   tstart = TCPU_TIME;
@@ -85,15 +85,23 @@ int main(){
     for (int i=0; i<2*nodes; i++){
       y[i] = 0;
     }
+    fprintf(f3, "%16.8e ", Pmax);
   
     for (int t=1; t<=steps; t+=internal_steps){
       runge_kutta(y, internal_steps);
     }
     fprintf(f2, "%16.8e %16.8e\n", Pmax, delta);
+
+    for (int i=0; i<nodes; i++){
+      fprintf(f3, "%16.8e ", y[i]/M_PI);
+    }
+    fprintf(f3, "\n");
     
     stability_check(y, &unstable, file);
     
-    if (unstable == 1) break;
+    /*if (unstable == 1) {
+      break;
+      }*/
 
     Pmax = Pmax - Pstep;
     delta = 0.1/Pmax;
@@ -108,6 +116,9 @@ int main(){
   fclose(f2);
   memset(f2, 0, sizeof(*f2));
   free(f2);
+  fclose(f3);
+  memset(f3, 0, sizeof(*f3));
+  free(f3);
   memset(y, 0, sizeof(*y));
   free(y);
   
