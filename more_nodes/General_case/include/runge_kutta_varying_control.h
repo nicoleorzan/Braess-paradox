@@ -20,7 +20,7 @@ void derivs(double *y, double *dydt){
 	sum += weights[j] * sin( y[i] - y[(AV[j])] );
       }
     dydt[i] = y[i+nodes];
-    dydt[i+nodes] = -alpha*y[i+nodes] - Pmax*tanh(delta*y[i]) + P[i] - sum; //Gamma*y[i] + P[i] - sum;
+    dydt[i+nodes] = -alpha*y[i+nodes] - Pmax*tanh(delta*y[i]) + P[i] - sum;
     
   }
 }

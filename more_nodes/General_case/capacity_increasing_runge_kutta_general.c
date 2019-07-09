@@ -3,7 +3,7 @@
 #include <string.h>
 #include "include/time_computing.h"
 #include "include/network.h"
-#include "include/runge_kutta.h"
+#include "include/runge_kutta_varying_control.h"
 
 #define steps 25000
 #define additive_steps 1000
