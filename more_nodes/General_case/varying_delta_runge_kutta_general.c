@@ -11,8 +11,9 @@
 #define internal_steps 10
 #define max_error 10e-10
 
-#define delta_min 0.0
+#define delta_min 0.000001
 #define delta_step 0.01
+#define delta_max 2.0
 
 void print_info(FILE *file){
   fprintf(file, "control form: Pmax*tanh(delta*theta)\n");
@@ -62,6 +63,7 @@ void stability_check(double* y, bool *unstable, FILE* file){
     fprintf(file, "slope (Pmax*delta) =%16.8e\n", Pmax*delta);
     fprintf(file, "error =%16.8e\n", sum);
     fprintf(file, "Stability not reached\n\n");
+    //fprintf(stdout, "Stability NOT reached\n\n");
     *unstable = 1;
   }
   else {
@@ -93,10 +95,10 @@ int main(){
  
   tstart = TCPU_TIME;
 
-  delta = 1.0;
+  delta = delta_min;
   Pmax = 0.1/delta;
 
-  while (delta >= delta_min){
+  while (delta <= delta_max){
     for (int t=1; t<=steps; t+=internal_steps){
       runge_kutta(y, internal_steps);
     }
@@ -105,9 +107,9 @@ int main(){
     
     stability_check(y, &unstable, file);
 
-    //if (unstable == 1)  break;
+    if (unstable == 1)  break;
 
-    delta = delta - delta_step;
+    delta = delta + delta_step;
     Pmax = 0.1/delta;
   }
 
