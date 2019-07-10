@@ -6,7 +6,7 @@
 #include "include/network.h"
 #include "include/runge_kutta_varying_control.h"
 
-#define steps 50000
+#define steps 110000
 #define additive_steps 1000
 #define internal_steps 10
 #define max_error 10e-10
@@ -93,6 +93,7 @@ int main(){
  
   tstart = TCPU_TIME;
 
+
   Pmax = 1.0;
   delta = 0.1/Pmax;
 
@@ -105,10 +106,11 @@ int main(){
     
     stability_check(y, &unstable, file);
 
-    //if (unstable == 1)  break;
+    if (unstable == 1)  break;
 
     Pmax = Pmax - Pstep;
     delta = 0.1/Pmax;
+
   }
 
   ctime += TCPU_TIME - tstart;
