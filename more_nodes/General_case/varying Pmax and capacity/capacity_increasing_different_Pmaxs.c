@@ -10,7 +10,7 @@
 #define internal_steps 10
 #define max_error 10e-10
 
-#define max_capacity 2.5//1.73
+#define max_capacity 4//1.73
 #define deltaK 0.01
 
 
@@ -66,7 +66,7 @@ int main(){
   
   for (int i=0; i< nodes; i++){
     if (i==1 || i==2 || i==3 || i==6){
-      Pmax[i] = 0.2;
+      Pmax[i] = 0.3;
       delta[i] = 0.1/Pmax[i];
     }
     else Pmax[i] = 0.1;
