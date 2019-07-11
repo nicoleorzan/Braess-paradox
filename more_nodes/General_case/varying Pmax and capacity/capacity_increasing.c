@@ -5,12 +5,12 @@
 #include "../include/network.h"
 #include "../include/runge_kutta_varying_control.h"
 
-#define steps 100000
+#define steps 1000000
 #define additive_steps 1000
 #define internal_steps 10
 #define max_error 10e-10
 
-#define max_capacity 4//1.73
+#define max_capacity 2 //1.73
 #define deltaK 0.01
 
 
@@ -64,8 +64,9 @@ int main(){
 
   tstart = TCPU_TIME;
 
-  Pmax = 0.03;
-  delta = 0.1/Pmax;
+  Pmax = 0.01;
+  //delta = 0.1/Pmax;
+  delta = 1;
   
   for (int i=0; i<2*nodes; i++){
     y[i] = 0;
