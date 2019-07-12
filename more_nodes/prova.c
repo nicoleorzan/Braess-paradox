@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "omp.h"
 #include "include/time_computing.h"
 #include "include/network.h"
 #include "include/runge_kutta.h"
@@ -11,16 +10,24 @@
 #define steps 1000000
 #define additive_steps 1000
 #define internal_steps 10
+#define Pmax_num 11
+#define delta_num 41
 
 double delta_step = 0.1;
 double delta_max = 4.1;
 double Pmax_step = 0.1;
 double Pmax_max = 1.1;
-double Pmax_min = 0.;
-double delta_min = 0.;
+double Pmax_vals[Pmax_num] = {0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0};
+double delta_vals[delta_num];
+
 
 int main(){
 
+  for (int i=0; i<delta_num; i++){
+    delta_vals[i] = i*0.1;
+    fprintf(stdout, "%16.8f ", delta_vals[i]);
+  }
+  
   double tstart, tstop, ctime=0;
   struct timespec ts;
   
@@ -31,21 +38,24 @@ int main(){
   bool unstable = 0;
   
   FILE* doc;
-  doc = fopen("control_delta", "w");
+  doc = fopen("prova", "w");
 
   tstart = TCPU_TIME;
   
-  Pmax = Pmax_max;
+  Pmax = 0;
   fprintf(doc, "delta      Pmax      control[0]      control[1]       control[2]      control[3]       control[4]      control[5]       control[6]      control[7]\n");
   
-  while (Pmax >= Pmax_min){
+  for (int i=Pmax_num-1; i>=0; i--){
 
-    delta = delta_max;
-    fprintf(stdout, "Pmax = %16.8e \n", Pmax);
-    
-    while (delta >= delta_min){
-      
-      fprintf(stdout, "delta = %16.8e \n", delta);
+    Pmax = Pmax_vals[i];
+    delta = 0;
+    //fprintf(stdout, "Pmax = %16.8e \n", Pmax);
+
+    #pragma omp parallel for
+    for (int j=delta_num-1; j>=0; j--){
+
+      delta = delta_vals[j];
+      //fprintf(stdout, "delta = %16.8e \n", delta);
     
       for (int t=1; t<=steps; t+=internal_steps){
 	runge_kutta(y, internal_steps);
@@ -59,10 +69,8 @@ int main(){
 
       stability_check(runge_kutta, y, additive_steps, &unstable);
 
-      delta = delta - delta_step;
     }
 
-    Pmax = Pmax - Pmax_step;
   }
 
   ctime += TCPU_TIME - tstart;
