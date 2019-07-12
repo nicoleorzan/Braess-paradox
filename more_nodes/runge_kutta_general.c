@@ -42,7 +42,7 @@ int main(){
     
    }
 
-  stability_check(y, additive_steps);
+  stability_check(runge_kutta, y, additive_steps);
 
   ctime += TCPU_TIME - tstart;
   printf("%g sec \n", ctime);

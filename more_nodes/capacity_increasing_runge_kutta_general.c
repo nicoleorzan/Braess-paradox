@@ -82,7 +82,7 @@ int main(){
     for (int t=1; t<=steps; t+=internal_steps){  
       runge_kutta(y, internal_steps);
     }
-    stability_check(y, additive_steps, runge_kutta);
+    stability_check(runge_kutta, y, additive_steps);
 
     printer(y, capacity_doc);
 

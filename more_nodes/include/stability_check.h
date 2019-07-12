@@ -5,7 +5,7 @@
 
 #include <math.h>
 
-void stability_check(double* y, int additive_steps, void (*runge_kutta)(double* , int)){
+void stability_check(void (*iterative_function)(double* , int), double* y, int additive_steps){
   
   double theta_save[nodes];
   double error[nodes];
@@ -16,7 +16,7 @@ void stability_check(double* y, int additive_steps, void (*runge_kutta)(double* 
     error[i] = 0.;
   }
 
-  runge_kutta(y, additive_steps);
+  iterative_function(y, additive_steps);
   
   for (int i=0; i<nodes; i++){
     error[i] = fabs(theta_save[i] - y[i]);
