@@ -130,7 +130,7 @@ fig = plt.figure(figsize=(10, 8))
 ax = fig.add_subplot(111)
 ax.plot(delta, controls)
 ax.set_xlabel('$\delta$', fontsize=20, rotation=0)
-ax.set_ylabel('$\sum_i | P_{max} tanh( \delta \cdot \theta_{i} )| $', fontsize=18, rotation=90)
+ax.set_ylabel('$P_{max} tanh( \delta \cdot \theta_{i} )$', fontsize=18, rotation=90)
 plt.grid()
 plt.show()
 ```
@@ -173,7 +173,7 @@ fig = plt.figure(figsize=(10, 8))
 ax = fig.add_subplot(111)
 ax.plot(delta2, controls2)
 ax.set_xlabel('$\delta$', fontsize=20, rotation=0)
-ax.set_ylabel('$\sum_i | P_{max} tanh( \delta \cdot \theta_{i} )| $', fontsize=18, rotation=90)
+ax.set_ylabel('$P_{max} tanh( \delta \cdot \theta_{i} ) $', fontsize=18, rotation=90)
 plt.grid()
 plt.show()
 ```
@@ -325,12 +325,36 @@ controls_sum3 = controls_abs3.sum(axis=1)
 
 
 ```python
-import matplotlib.pyplot as plt
-from mpl_toolkits.mplot3d import Axes3D
+delta3 = np.matrix(delta3)
+Pmax3 = np.matrix(Pmax3)
+control_sum3 = np.matrix(controls_sum3)
+print(delta3.shape)
+x = np.reshape(delta3, (492))
+print(x.shape)
+x = np.reshape(delta3, (123, 4))
+print(x.shape)
+```
 
+    (1, 492)
+    (1, 492)
+    (123, 4)
+
+
+
+```python
+len(delta3)
+x = np.reshape(delta3, (4, 123))
+y = np.reshape(Pmax3, (4, 123))
+z = np.reshape(control_sum3, (4, 123))
+```
+
+
+```python
 fig = plt.figure(figsize=(14,12))
 ax = fig.add_subplot(111, projection='3d')
-ax.plot(delta3, Pmax3, controls_sum3)
+
+ax.plot_surface(x, y, z)
+
 ax.set_xlabel('$\delta$', fontsize=22, rotation=150)
 ax.set_ylabel('$Pmax$', fontsize=20)
 ax.set_zlabel('$\sum_i | P_{max} tanh( \delta \cdot \theta_{i} )| $', fontsize=20, rotation=60)
@@ -338,5 +362,26 @@ plt.show()
 ```
 
 
-![png](output_11_0.png)
+![png](output_13_0.png)
+
+
+
+```python
+fig = plt.figure(figsize=(14,12))
+ax = fig.gca(projection='3d')
+
+surf = ax.plot_surface(x, y, z, cmap=cm.coolwarm,
+                       linewidth=0, antialiased=False)
+
+# Add a color bar which maps values to colors.
+#fig.colorbar(surf, shrink=0.5, aspect=5)
+
+ax.set_xlabel('$\delta$', fontsize=22, rotation=150)
+ax.set_ylabel('$Pmax$', fontsize=10)
+ax.set_zlabel('$\sum_i | P_{max} tanh( \delta \cdot \theta_{i} )| $', fontsize=10, rotation=60)
+plt.show()
+```
+
+
+![png](output_14_0.png)
 

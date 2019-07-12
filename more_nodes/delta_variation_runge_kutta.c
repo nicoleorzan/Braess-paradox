@@ -7,7 +7,7 @@
 #include "include/runge_kutta.h"
 #include "include/stability_check.h"
 
-#define steps 500000
+#define steps 1000000
 #define additive_steps 1000
 #define internal_steps 10
 
@@ -15,6 +15,8 @@ double delta_step = 0.1;
 double delta_max = 4.1;
 double Pmax_step = 0.1;
 double Pmax_max = 1.1;
+double Pmax_min = 0.;
+double delta_min = 0.;
 
 int main(){
 
@@ -32,15 +34,15 @@ int main(){
 
   tstart = TCPU_TIME;
   
-  Pmax = 0;
+  Pmax = Pmax_max;
   fprintf(doc, "delta      Pmax      control[0]      control[1]       control[2]      control[3]       control[4]      control[5]       control[6]      control[7]\n");
   
-  while (Pmax <= Pmax_max){
+  while (Pmax >= Pmax_min){
 
-    delta = 0;
+    delta = delta_max;
     fprintf(stdout, "Pmax = %16.8e \n", Pmax);
     
-    while (delta <= delta_max){
+    while (delta >= delta_min){
       
       fprintf(stdout, "delta = %16.8e \n", delta);
     
@@ -56,10 +58,10 @@ int main(){
 
       stability_check(runge_kutta, y, additive_steps, &unstable);
 
-      delta = delta + delta_step;
+      delta = delta - delta_step;
     }
 
-    Pmax = Pmax + Pmax_step;
+    Pmax = Pmax - Pmax_step;
   }
 
   ctime += TCPU_TIME - tstart;
