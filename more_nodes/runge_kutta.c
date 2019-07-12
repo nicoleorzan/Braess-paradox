@@ -22,8 +22,6 @@ int main(){
     y[i] = 0;
   }
   bool unstable = 0;
-  //weights[5] = 1.68;
-  //weights[8] = 1.68;
   
   FILE* theta_doc;
   theta_doc = fopen("theta", "w");
