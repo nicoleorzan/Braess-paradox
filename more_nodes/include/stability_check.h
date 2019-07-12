@@ -3,8 +3,9 @@
 
 #define max_error 10e-10
 
+#include <math.h>
 
-void stability_check(double* y, int additive_steps, void (*runge_kutta)(double* , double*)){
+void stability_check(double* y, int additive_steps, void (*runge_kutta)(double* , int)){
   
   double theta_save[nodes];
   double error[nodes];
