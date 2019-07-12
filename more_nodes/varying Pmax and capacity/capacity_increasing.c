@@ -5,13 +5,13 @@
 #include "../include/network.h"
 #include "../include/runge_kutta_varying_control.h"
 
-#define steps 1000000
+#define steps 7000000
 #define additive_steps 1000
 #define internal_steps 10
 #define max_error 10e-10
 
 #define max_capacity 2 //1.73
-#define deltaK 0.01
+//#define deltaK 0.1
 
 
 void stability_check(double* y){
@@ -54,6 +54,7 @@ int main(){
   
   double tstart, tstop, ctime=0;
   struct timespec ts;
+  double deltaK = 0.1;
   
   double *y = (double*) malloc(2 * nodes * sizeof(double));
   int iter = 0;
@@ -73,6 +74,9 @@ int main(){
   }
 
   while (cap < max_capacity){
+    if (cap == 1.83){
+      deltaK = 0.01;
+    }
     fprintf(stdout, "%f\n", cap);
     fprintf(capacity_doc, "%16.8f", deltaK*iter);
 

@@ -3,18 +3,19 @@
 #include <string.h>
 #include "include/time_computing.h"
 #include "include/network.h"
+#include "include/stability_check.h"
 #include "include/runge_kutta_varying_control.h"
 
 #define steps 25000
 #define additive_steps 1000
 #define internal_steps 10
-#define max_error 10e-10
+//#define max_error 10e-10
 
 #define max_capacity 1.73
 #define deltaK 0.01
 
 
-void stability_check(double* y){
+/*void stability_check(double* y, int add_steps){
     
   double theta_save[nodes];
   double error[nodes];
@@ -25,7 +26,7 @@ void stability_check(double* y){
     error[i] = 0.;
   }
 
-  runge_kutta(y, additive_steps);
+  runge_kutta(y, add_steps);
   
   for (int i=0; i<nodes; i++){
     error[i] = fabs(theta_save[i] - y[i]);
@@ -39,7 +40,7 @@ void stability_check(double* y){
     fprintf(stdout, "error =%16.8e\n", sum);
     fprintf(stdout, "Stability reached\n\n");
   }
-}
+  }*/
 
 void printer(double * y, FILE * f){
   fprintf(f, "%16.8e", (y[3]-y[4])/M_PI); //diff nodes 4-5
@@ -81,7 +82,7 @@ int main(){
     for (int t=1; t<=steps; t+=internal_steps){  
       runge_kutta(y, internal_steps);
     }
-    stability_check(y);
+    stability_check(y, additive_steps, runge_kutta);
 
     printer(y, capacity_doc);
 

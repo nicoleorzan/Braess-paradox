@@ -4,40 +4,12 @@
 #include "include/time_computing.h"
 #include "include/network.h"
 #include "include/runge_kutta.h"
+#include "include/stability_check.h"
 
 #define steps 8000
 #define additive_steps 1000
 #define internal_steps 10
 #define printing_step 10
-#define max_error 10e-7
-
-void stability_check(double* y){
-  
-  double theta_save[nodes];
-  double error[nodes];
-  double sum = 0.;
-  
-  for (int i=0; i<nodes; i++){
-    theta_save[i] = y[i];
-    error[i] = 0.;
-  }
-
-  runge_kutta(y, internal_steps);
-  
-  for (int i=0; i<nodes; i++){
-    error[i] = fabs(theta_save[i] - y[i]);
-    sum += error[i];
-  }
-  if (sum >= max_error) {
-    fprintf(stdout, "error =%16.8e\n", sum);
-    fprintf(stdout, "Stability not reached\n\n");
-  }
-  else {
-    fprintf(stdout, "error =%16.8e\n", sum);
-    fprintf(stdout, "Stability reached\n\n");
-  }
-
-}
 
 
 int main(){
@@ -70,7 +42,7 @@ int main(){
     
    }
 
-  stability_check(y);
+  stability_check(y, additive_steps);
 
   ctime += TCPU_TIME - tstart;
   printf("%g sec \n", ctime);
