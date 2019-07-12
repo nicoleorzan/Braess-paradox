@@ -4,12 +4,13 @@
 #include <stdbool.h>
 #include "include/time_computing.h"
 #include "include/network.h"
+#include "include/stability_check.h"
 #include "include/runge_kutta_varying_control.h"
 
 #define steps 110000
 #define additive_steps 1000
 #define internal_steps 10
-#define max_error 10e-10
+//#define max_error 10e-10
 
 #define Pmin 0.0
 #define Pstep 0.01
@@ -39,7 +40,7 @@ void printer(double * y, FILE * f){
   fprintf(f, "\n");
 }
 
-void stability_check(double* y, bool *unstable, FILE* file){
+/*void stability_check(double* y, bool *unstable, FILE* file){
   
   double theta_save[nodes];
   double error[nodes];
@@ -71,7 +72,7 @@ void stability_check(double* y, bool *unstable, FILE* file){
     fprintf(file, "error =%16.8e\n", sum);
     fprintf(file, "Stability reached\n\n");
   }
-}
+  }*/
 
 
 int main(){
@@ -85,9 +86,9 @@ int main(){
     y[i] = 0;
   }
 
-  FILE* file, * f;
-  file = fopen("control_variation", "w");
-  print_info(file);
+  FILE * f;
+  //file = fopen("control_variation", "w");
+  //print_info(file);
 
   f = fopen("theta", "w");
  
@@ -104,7 +105,7 @@ int main(){
 
     printer(y, f);
     
-    stability_check(y, &unstable, file);
+    stability_check(runge_kutta, y, additive_steps, &unstable);
 
     if (unstable == 1)  break;
 
@@ -116,9 +117,9 @@ int main(){
   ctime += TCPU_TIME - tstart;
   printf("%g sec \n", ctime);
 
-  fclose(file);
-  memset(file, 0, sizeof(*file));
-  free(file);
+  //fclose(file);
+  //memset(file, 0, sizeof(*file));
+  //free(file);
   fclose(f);
   memset(f, 0, sizeof(*f));
   free(f);

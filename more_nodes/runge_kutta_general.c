@@ -21,6 +21,7 @@ int main(){
   for (int i=0; i<2*nodes; i++){
     y[i] = 0;
   }
+  bool unstable = 0;
   //weights[5] = 1.68;
   //weights[8] = 1.68;
   
@@ -42,7 +43,7 @@ int main(){
     
    }
 
-  stability_check(runge_kutta, y, additive_steps);
+  stability_check(runge_kutta, y, additive_steps, &unstable);
 
   ctime += TCPU_TIME - tstart;
   printf("%g sec \n", ctime);

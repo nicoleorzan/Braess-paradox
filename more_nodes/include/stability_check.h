@@ -5,7 +5,7 @@
 
 #include <math.h>
 
-void stability_check(void (*iterative_function)(double* , int), double* y, int additive_steps){
+void stability_check(void (*iterative_function)(double* , int), double* y, int additive_steps, bool* unstable){
   
   double theta_save[nodes];
   double error[nodes];
@@ -25,6 +25,7 @@ void stability_check(void (*iterative_function)(double* , int), double* y, int a
   if (sum >= max_error) {
     fprintf(stdout, "error =%16.8e\n", sum);
     fprintf(stdout, "Stability not reached\n\n");
+    *unstable = 1;
   }
   else {
     fprintf(stdout, "error =%16.8e\n", sum);

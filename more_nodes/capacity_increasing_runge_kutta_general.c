@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdbool.h>
 #include "include/time_computing.h"
 #include "include/network.h"
 #include "include/stability_check.h"
@@ -63,7 +64,11 @@ int main(){
   struct timespec ts;
   
   double *y = (double*) malloc(2 * nodes * sizeof(double));
+  for (int i=0; i<2*nodes; i++){
+    y[i] = 0;
+  }
   int iter = 0;
+  bool unstable = 0;
   double cap = weights[5];
 
   FILE* capacity_doc;
@@ -82,7 +87,7 @@ int main(){
     for (int t=1; t<=steps; t+=internal_steps){  
       runge_kutta(y, internal_steps);
     }
-    stability_check(runge_kutta, y, additive_steps);
+    stability_check(runge_kutta, y, additive_steps, &unstable);
 
     printer(y, capacity_doc);
 
