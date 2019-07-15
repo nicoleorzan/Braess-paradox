@@ -11,124 +11,14 @@ import numpy as np
 plt.rcParams['savefig.dpi'] = 1000
 ```
 
+### Pmax = 0.1
+
 
 ```python
-df = pd.read_csv('control_delta_doubling_3-4_line', delim_whitespace = True)
+df = pd.read_csv('lunedi', delim_whitespace = True)
 df.head()
-```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>delta</th>
-      <th>Pmax</th>
-      <th>control[0]</th>
-      <th>control[1]</th>
-      <th>control[2]</th>
-      <th>control[3]</th>
-      <th>control[4]</th>
-      <th>control[5]</th>
-      <th>control[6]</th>
-      <th>control[7]</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>4.1</td>
-      <td>1.1</td>
-      <td>-0.492511</td>
-      <td>0.714528</td>
-      <td>0.774335</td>
-      <td>0.530559</td>
-      <td>-0.717260</td>
-      <td>-0.806918</td>
-      <td>0.714528</td>
-      <td>-0.717260</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>4.0</td>
-      <td>1.1</td>
-      <td>-0.486523</td>
-      <td>0.710496</td>
-      <td>0.770032</td>
-      <td>0.525033</td>
-      <td>-0.713260</td>
-      <td>-0.803013</td>
-      <td>0.710496</td>
-      <td>-0.713260</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>3.9</td>
-      <td>1.1</td>
-      <td>-0.480372</td>
-      <td>0.706328</td>
-      <td>0.765567</td>
-      <td>0.519354</td>
-      <td>-0.709125</td>
-      <td>-0.798954</td>
-      <td>0.706328</td>
-      <td>-0.709125</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>3.8</td>
-      <td>1.1</td>
-      <td>-0.474053</td>
-      <td>0.702015</td>
-      <td>0.760930</td>
-      <td>0.513515</td>
-      <td>-0.704845</td>
-      <td>-0.794733</td>
-      <td>0.702015</td>
-      <td>-0.704845</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>3.7</td>
-      <td>1.1</td>
-      <td>-0.467557</td>
-      <td>0.697551</td>
-      <td>0.756110</td>
-      <td>0.507509</td>
-      <td>-0.700414</td>
-      <td>-0.790337</td>
-      <td>0.697551</td>
-      <td>-0.700414</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-#### selecting dataframe for Pmax = 1
-
-
-```python
-df_Pmax1 = df[df.Pmax == 1.0]
-delta1 = df_Pmax1.loc[:, 'delta']
-controls1 = df_Pmax1.iloc[:,2:9]
+delta1 = df.loc[:, 'delta']
+controls1 = df.iloc[:, 2:9]
 controls1_abs = controls1.abs()
 controls1_sum = controls1_abs.sum(axis=1)
 ```
@@ -145,7 +35,7 @@ plt.show()
 ```
 
 
-![png](output_4_0.png)
+![png](output_3_0.png)
 
 
 
@@ -160,10 +50,10 @@ plt.show()
 ```
 
 
-![png](output_5_0.png)
+![png](output_4_0.png)
 
 
-#### Pmax = 0.2
+### Pmax = 0.2
 
 
 ```python
@@ -290,7 +180,7 @@ plt.show()
 ```
 
 
-![png](output_9_0.png)
+![png](output_8_0.png)
 
 
 
@@ -305,7 +195,7 @@ plt.show()
 ```
 
 
-![png](output_10_0.png)
+![png](output_9_0.png)
 
 
 #### surface plot
@@ -361,7 +251,7 @@ plt.show()
 ```
 
 
-![png](output_15_0.png)
+![png](output_14_0.png)
 
 
 
@@ -382,5 +272,5 @@ plt.show()
 ```
 
 
-![png](output_16_0.png)
+![png](output_15_0.png)
 

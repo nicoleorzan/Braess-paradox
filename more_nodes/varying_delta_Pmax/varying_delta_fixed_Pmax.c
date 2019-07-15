@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "include/time_computing.h"
-#include "include/network.h"
-#include "include/stability_check.h"
-#include "include/runge_kutta.h"
+#include "../include/time_computing.h"
+#include "../include/network.h"
+#include "../include/stability_check.h"
+#include "../include/runge_kutta.h"
 
 #define steps 190000
 #define additive_steps 1000

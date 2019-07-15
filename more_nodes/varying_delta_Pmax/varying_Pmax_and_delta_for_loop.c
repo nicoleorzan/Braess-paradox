@@ -44,7 +44,7 @@ int main(){
   Pmax = 0;
   fprintf(doc, "     delta      Pmax      control[0]      control[1]       control[2]      control[3]       control[4]      control[5]       control[6]      control[7]\n");
 
-  #pragma omp parallel for
+  #pragma omp parallel for ordered
   for (int i=Pmax_num-1; i>=0; i--){
 
     Pmax = Pmax_vals[i];
@@ -60,6 +60,7 @@ int main(){
 	runge_kutta(y, internal_steps);
       }
 
+      #pragma omp ordered
       fprintf(doc, "%16.8f %16.8f ", delta, Pmax);
       for (int i=0; i<nodes; i++){
 	fprintf(doc, "%16.8e", -Pmax*tanh(delta*y[i]));
