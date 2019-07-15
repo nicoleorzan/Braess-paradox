@@ -15,13 +15,120 @@ plt.rcParams['savefig.dpi'] = 1000
 
 
 ```python
-df = pd.read_csv('lunedi', delim_whitespace = True)
-df.head()
-delta1 = df.loc[:, 'delta']
-controls1 = df.iloc[:, 2:9]
+df = pd.read_csv('control_delta_Pmax_both_varying_doubling_3-4_line', delim_whitespace = True)
+df1 = df[df.Pmax == 0.1]
+delta1 = df1.loc[:, 'delta']
+controls1 = df1.iloc[:, 2:9]
+controls1 = -controls1 # I forgot the minus in the printing of data
 controls1_abs = controls1.abs()
 controls1_sum = controls1_abs.sum(axis=1)
+df.head()
 ```
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>delta</th>
+      <th>Pmax</th>
+      <th>control[0]</th>
+      <th>control[1]</th>
+      <th>control[2]</th>
+      <th>control[3]</th>
+      <th>control[4]</th>
+      <th>control[5]</th>
+      <th>control[6]</th>
+      <th>control[7]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4.1</td>
+      <td>1.1</td>
+      <td>-0.492511</td>
+      <td>0.714528</td>
+      <td>0.774335</td>
+      <td>0.530559</td>
+      <td>-0.717260</td>
+      <td>-0.806918</td>
+      <td>0.714528</td>
+      <td>-0.717260</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.0</td>
+      <td>1.1</td>
+      <td>-0.486523</td>
+      <td>0.710496</td>
+      <td>0.770032</td>
+      <td>0.525033</td>
+      <td>-0.713260</td>
+      <td>-0.803013</td>
+      <td>0.710496</td>
+      <td>-0.713260</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3.9</td>
+      <td>1.1</td>
+      <td>-0.480372</td>
+      <td>0.706328</td>
+      <td>0.765567</td>
+      <td>0.519354</td>
+      <td>-0.709125</td>
+      <td>-0.798954</td>
+      <td>0.706328</td>
+      <td>-0.709125</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3.8</td>
+      <td>1.1</td>
+      <td>-0.474053</td>
+      <td>0.702015</td>
+      <td>0.760930</td>
+      <td>0.513515</td>
+      <td>-0.704845</td>
+      <td>-0.794733</td>
+      <td>0.702015</td>
+      <td>-0.704845</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.7</td>
+      <td>1.1</td>
+      <td>-0.467557</td>
+      <td>0.697551</td>
+      <td>0.756110</td>
+      <td>0.507509</td>
+      <td>-0.700414</td>
+      <td>-0.790337</td>
+      <td>0.697551</td>
+      <td>-0.700414</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
 
 
 ```python
@@ -57,7 +164,8 @@ plt.show()
 
 
 ```python
-df2 = pd.read_csv('control_varying_delta_Pmax_0.2_doubling_3-4_line', delim_whitespace = True, header = None)
+df2 = df[df.Pmax == 0.2]
+#df2 = pd.read_csv('Pmax_0.2_varying_delta_doubling_3-4_line', delim_whitespace = True)
 df2.head()
 ```
 
@@ -82,77 +190,83 @@ df2.head()
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>0</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
+      <th>delta</th>
+      <th>Pmax</th>
+      <th>control[0]</th>
+      <th>control[1]</th>
+      <th>control[2]</th>
+      <th>control[3]</th>
+      <th>control[4]</th>
+      <th>control[5]</th>
+      <th>control[6]</th>
+      <th>control[7]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
+      <th>369</th>
+      <td>4.1</td>
+      <td>0.2</td>
+      <td>-0.126433</td>
+      <td>0.198221</td>
+      <td>0.197676</td>
+      <td>0.131010</td>
+      <td>-0.199494</td>
+      <td>-0.199707</td>
+      <td>0.198221</td>
+      <td>-0.199494</td>
+    </tr>
+    <tr>
+      <th>370</th>
       <td>4.0</td>
-      <td>0.124401</td>
-      <td>-0.197982</td>
-      <td>-0.197391</td>
-      <td>-0.129498</td>
-      <td>0.199401</td>
-      <td>0.199650</td>
-      <td>-0.197982</td>
-      <td>0.199401</td>
+      <td>0.2</td>
+      <td>-0.124401</td>
+      <td>0.197982</td>
+      <td>0.197391</td>
+      <td>0.129498</td>
+      <td>-0.199401</td>
+      <td>-0.199650</td>
+      <td>0.197982</td>
+      <td>-0.199401</td>
     </tr>
     <tr>
-      <th>1</th>
+      <th>371</th>
       <td>3.9</td>
-      <td>0.122299</td>
-      <td>-0.197713</td>
-      <td>-0.197073</td>
-      <td>-0.127964</td>
-      <td>0.199291</td>
-      <td>0.199581</td>
-      <td>-0.197713</td>
-      <td>0.199291</td>
+      <td>0.2</td>
+      <td>-0.122299</td>
+      <td>0.197713</td>
+      <td>0.197073</td>
+      <td>0.127964</td>
+      <td>-0.199291</td>
+      <td>-0.199581</td>
+      <td>0.197713</td>
+      <td>-0.199291</td>
     </tr>
     <tr>
-      <th>2</th>
+      <th>372</th>
       <td>3.8</td>
-      <td>0.120122</td>
-      <td>-0.197409</td>
-      <td>-0.196717</td>
-      <td>-0.126409</td>
-      <td>0.199161</td>
-      <td>0.199499</td>
-      <td>-0.197409</td>
-      <td>0.199161</td>
+      <td>0.2</td>
+      <td>-0.120122</td>
+      <td>0.197409</td>
+      <td>0.196717</td>
+      <td>0.126409</td>
+      <td>-0.199161</td>
+      <td>-0.199499</td>
+      <td>0.197409</td>
+      <td>-0.199161</td>
     </tr>
     <tr>
-      <th>3</th>
+      <th>373</th>
       <td>3.7</td>
-      <td>0.117867</td>
-      <td>-0.197066</td>
-      <td>-0.196320</td>
-      <td>-0.124832</td>
-      <td>0.199008</td>
-      <td>0.199400</td>
-      <td>-0.197066</td>
-      <td>0.199008</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>3.6</td>
-      <td>0.115533</td>
-      <td>-0.196680</td>
-      <td>-0.195876</td>
-      <td>-0.123232</td>
-      <td>0.198826</td>
-      <td>0.199283</td>
-      <td>-0.196680</td>
-      <td>0.198826</td>
+      <td>0.2</td>
+      <td>-0.117867</td>
+      <td>0.197066</td>
+      <td>0.196320</td>
+      <td>0.124832</td>
+      <td>-0.199008</td>
+      <td>-0.199400</td>
+      <td>0.197066</td>
+      <td>-0.199008</td>
     </tr>
   </tbody>
 </table>
@@ -163,7 +277,8 @@ df2.head()
 
 ```python
 delta2 = df2.iloc[:,0]
-controls2 = df2.iloc[:, 1:8]
+controls2 = df2.iloc[:, 2:9]
+controls2 = -controls2 # I forget the minus in the printing of data
 controls2_abs = controls2.abs()
 controls2_sum = controls2_abs.sum(axis=1)
 ```
@@ -198,7 +313,7 @@ plt.show()
 ![png](output_9_0.png)
 
 
-#### surface plot
+### Surface plot
 
 
 ```python

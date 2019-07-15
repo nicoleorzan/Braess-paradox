@@ -14,7 +14,7 @@
 
 #define Pmin 0.0
 #define Pstep 0.01
-#define Pmax_fixed 0.1
+#define Pmax_fixed 0.2
 #define delta_min 0.0
 #define delta_step 0.1
 #define delta_max 4.0
