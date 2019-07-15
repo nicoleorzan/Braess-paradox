@@ -5,7 +5,7 @@
 #include "include/time_computing.h"
 #include "include/network.h"
 #include "include/stability_check.h"
-#include "include/runge_kutta_varying_control.h"
+#include "include/runge_kutta.h"
 
 #define steps 25000
 #define additive_steps 1000
@@ -15,33 +15,6 @@
 #define max_capacity 1.73
 #define deltaK 0.01
 
-
-/*void stability_check(double* y, int add_steps){
-    
-  double theta_save[nodes];
-  double error[nodes];
-  double sum = 0.;
-  
-  for (int i=0; i<nodes; i++){
-    theta_save[i] = y[i];
-    error[i] = 0.;
-  }
-
-  runge_kutta(y, add_steps);
-  
-  for (int i=0; i<nodes; i++){
-    error[i] = fabs(theta_save[i] - y[i]);
-    sum += error[i];
-  }
-  if (sum >= max_error) {
-    fprintf(stdout, "error =%16.8e\n", sum);
-    fprintf(stdout, "Stability not reached\n\n");
-  }
-  else {
-    fprintf(stdout, "error =%16.8e\n", sum);
-    fprintf(stdout, "Stability reached\n\n");
-  }
-  }*/
 
 void printer(double * y, FILE * f){
   fprintf(f, "%16.8e", (y[3]-y[4])/M_PI); //diff nodes 4-5
@@ -57,6 +30,13 @@ void printer(double * y, FILE * f){
   fprintf(f, "\n");
 }
 
+void printer_bis(double * y, FILE * f){
+
+  for (int i=0; i<2*nodes; i++){
+    fprintf(f, "%16.8e ",-Pmax*tanh(delta*y[i]) );
+  }
+  fprintf(f, "\n");
+}
 
 int main(){
 
@@ -72,7 +52,7 @@ int main(){
   double cap = weights[5];
 
   FILE* capacity_doc;
-  capacity_doc = fopen("increasing_capacity", "w");
+  capacity_doc = fopen("tmp", "w");
 
   tstart = TCPU_TIME;
 

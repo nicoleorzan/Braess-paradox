@@ -40,40 +40,6 @@ void printer(double * y, FILE * f){
   fprintf(f, "\n");
 }
 
-/*void stability_check(double* y, bool *unstable, FILE* file){
-  
-  double theta_save[nodes];
-  double error[nodes];
-  double sum = 0.;
-
-  for (int i=0; i<nodes; i++){
-    theta_save[i] = y[i];
-    error[i] = 0.;
-  }
-
-  runge_kutta(y, additive_steps);
-  
-  for (int i=0; i<nodes; i++){
-    error[i] = fabs(theta_save[i] - y[i]);
-    sum += error[i];
-  }
-  if (sum >= max_error) {
-    fprintf(file, "Pmax =%16.8e\n", Pmax);
-    fprintf(file, "delta =%16.8e\n", delta);
-    fprintf(file, "slope (Pmax*delta) =%16.8e\n", Pmax*delta);
-    fprintf(file, "error =%16.8e\n", sum);
-    fprintf(file, "Stability not reached\n\n");
-    *unstable = 1;
-  }
-  else {
-    fprintf(file, "Pmax =%16.8e\n", Pmax);
-    fprintf(file, "delta =%16.8e\n", delta);
-    fprintf(file, "slope (Pmax*delta) =%16.8e\n", Pmax*delta);
-    fprintf(file, "error =%16.8e\n", sum);
-    fprintf(file, "Stability reached\n\n");
-  }
-  }*/
-
 
 int main(){
 

@@ -43,7 +43,7 @@ int main(){
   tstart = TCPU_TIME;
   
   Pmax = 0;
-  fprintf(doc, "delta      Pmax      control[0]      control[1]       control[2]      control[3]       control[4]      control[5]       control[6]      control[7]\n");
+  fprintf(doc, "     delta      Pmax      control[0]      control[1]       control[2]      control[3]       control[4]      control[5]       control[6]      control[7]\n");
   
   for (int i=Pmax_num-1; i>=0; i--){
 
