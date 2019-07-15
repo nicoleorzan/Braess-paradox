@@ -32,8 +32,16 @@ void printer(double * y, FILE * f){
 
 void printer_bis(double * y, FILE * f){
 
-  for (int i=0; i<2*nodes; i++){
+  for (int i=0; i<nodes; i++){
     fprintf(f, "%16.8e ",-Pmax*tanh(delta*y[i]) );
+  }
+  fprintf(f, "\n");
+}
+
+void printer_tris(double * y, FILE * f){
+
+  for (int i=0; i<2*nodes; i++){
+    fprintf(f, "%16.8e ",y[i] );
   }
   fprintf(f, "\n");
 }
@@ -75,11 +83,7 @@ int main(){
     weights[8] += deltaK;
     iter += 1;
     cap += deltaK;
-    /*fprintf(stdout, "%16.8e \n", weights[5]);
-    for (int i=0; i<2*nodes; i++){
-      fprintf(stdout, "%16.8e ", y[i]);
-    }
-    fprintf(stdout, "\n");*/
+
   }
 
   ctime += TCPU_TIME - tstart;

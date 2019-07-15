@@ -2,10 +2,10 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "include/time_computing.h"
-#include "include/network.h"
-#include "include/runge_kutta.h"
-#include "include/stability_check.h"
+#include "../include/time_computing.h"
+#include "../include/network.h"
+#include "../include/runge_kutta.h"
+#include "../include/stability_check.h"
 
 #define steps 1000000
 #define additive_steps 1000
@@ -25,7 +25,6 @@ int main(){
 
   for (int i=0; i<delta_num; i++){
     delta_vals[i] = i*0.1;
-    fprintf(stdout, "%16.8f ", delta_vals[i]);
   }
   
   double tstart, tstop, ctime=0;
@@ -38,24 +37,24 @@ int main(){
   bool unstable = 0;
   
   FILE* doc;
-  doc = fopen("prova", "w");
+  doc = fopen("variation_delta_Pmax", "w");
 
   tstart = TCPU_TIME;
   
   Pmax = 0;
   fprintf(doc, "     delta      Pmax      control[0]      control[1]       control[2]      control[3]       control[4]      control[5]       control[6]      control[7]\n");
-  
+
+  #pragma omp parallel for
   for (int i=Pmax_num-1; i>=0; i--){
 
     Pmax = Pmax_vals[i];
     delta = 0;
-    //fprintf(stdout, "Pmax = %16.8e \n", Pmax);
+    fprintf(stdout, "Pmax = %16.8e \n", Pmax);
 
-    #pragma omp parallel for
     for (int j=delta_num-1; j>=0; j--){
 
       delta = delta_vals[j];
-      //fprintf(stdout, "delta = %16.8e \n", delta);
+      fprintf(stdout, "delta = %16.8e \n", delta);
     
       for (int t=1; t<=steps; t+=internal_steps){
 	runge_kutta(y, internal_steps);
@@ -63,7 +62,7 @@ int main(){
 
       fprintf(doc, "%16.8f %16.8f ", delta, Pmax);
       for (int i=0; i<nodes; i++){
-	fprintf(doc, "%16.8e", Pmax*tanh(delta*y[i]));
+	fprintf(doc, "%16.8e", -Pmax*tanh(delta*y[i]));
       }
       fprintf(doc, "\n");
 
