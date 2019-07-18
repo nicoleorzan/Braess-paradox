@@ -7,11 +7,11 @@
 #include "../include/stability_check.h"
 #include "../include/runge_kutta_generators_consumers.h"
 
-#define steps 1000000
+#define steps 100000
 #define additive_steps 1000
 #define internal_steps 10
 
-#define max_capacity 1.73
+#define max_capacity 2.04
 #define deltaK 0.01
 
 
@@ -77,8 +77,10 @@ int main(){
     printer(y, capacity_doc);
     printer_control(y, control);
 
-    weights[5] += deltaK;
-    weights[8] += deltaK;
+    //weights[5] += deltaK;
+    //weights[8] += deltaK;
+    weights[0] += deltaK;
+    weights[15] += deltaK;
     iter += 1;
     cap += deltaK;
 

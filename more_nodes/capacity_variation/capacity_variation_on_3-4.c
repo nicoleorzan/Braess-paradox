@@ -7,7 +7,7 @@
 #include "../include/stability_check.h"
 #include "../include/runge_kutta.h"
 
-#define steps 25000
+#define steps 250000
 #define additive_steps 1000
 #define internal_steps 10
 //#define max_error 10e-10
@@ -48,6 +48,9 @@ void printer_tris(double * y, FILE * f){
 
 int main(){
 
+  delta = 0.1/Pmax;
+  fprintf(stdout, "delta = %16.8e\n", delta);
+  fprintf(stdout, "delta*Pmax = %16.8e\n", delta*Pmax);
   double tstart, tstop, ctime=0;
   struct timespec ts;
   
