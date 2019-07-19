@@ -1,11 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "include/time_computing.h"
-#include "include/network_2_nodes.h"
-#include "include/runge_kutta.h"
+#include "../include/time_computing.h"
+#include "network_2_nodes.h"
+#include "../include/runge_kutta.h"
 
-#define steps 100000
+#define steps 20000
 #define additive_steps 1000
 #define internal_steps 10
 #define printing_step 10

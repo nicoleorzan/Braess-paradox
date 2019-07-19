@@ -4,7 +4,7 @@
 #define nodes 8
 #define connections 20 // 22
 #define alpha 1.0
-#define Gamma 0
+#define Gamma 0.1
 
 
 //const double Gamma[nodes] = {0, 0, 0, 0, 0, 0, 0, 0};
@@ -15,7 +15,7 @@ const int AV[connections] = {5, 1, 6, 0, 2, 3, 1, 6, 2, 4, 7, 3, 5, 4, 7, 0, 2, 
 //const int AV[connections] = {5, 1, 6, 0, 2, 3, 3, 1, 6, 1, 2, 4, 7, 3, 5, 4, 7, 0, 2, 0, 3, 5}; //22 connections
 double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03};
 //double weights[connections] = {1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03, 1.03}; //22 connections
-double Pmax = 0.1;
+double Pmax = 0.2;
 double delta = 0;
 //double Pmax[nodes] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 //double delta[nodes] = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};

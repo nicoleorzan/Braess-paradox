@@ -2,26 +2,24 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "include/time_computing.h"
-#include "include/network.h"
-#include "include/stability_check.h"
-#include "include/runge_kutta.h"
+#include "../../include/time_computing.h"
+#include "../../include/network.h"
+#include "../../include/stability_check.h"
+#include "../../include/runge_kutta.h"
 
 #define steps 190000
 #define additive_steps 1000
 #define internal_steps 10
 //#define max_error 10e-10
 
-#define Pmin 0.0
-#define Pstep 0.01
-#define Pmax_fixed 0.2
-#define delta_min 0.0
-#define delta_step 0.1
-#define delta_max 4.0
+#define Pmax_max 0.2
+#define Pmax_step 0.01
+#define Pmax_min 0.
+#define delta_fixed 1
 
 void print_info(FILE *file){
   fprintf(file, "control form: Pmax*tanh(delta*theta)\n");
-  fprintf(file, "variation of Pmax from %f to %f with step %f\n", Pmax, Pmin, Pstep);
+  //fprintf(file, "variation of Pmax from %f to %f with step %f\n", Pmax, Pmin, Pstep);
   fprintf(file, "and modifying Pmax as 0.1/delta to keep slope stable to 0.1 (in approx) \n");
   fprintf(file, "Computation of stability reached/unreached in every variables update with comparison after %i and %i steps\n", steps, steps+additive_steps);
   fprintf(file, "Computation is stopped when stability is not reached anymore\n");
@@ -59,21 +57,26 @@ int main(){
   tstart = TCPU_TIME;
 
 
-  Pmax = Pmax_fixed;
-  delta = delta_max;
+  Pmax = Pmax_max;
+  delta = 0.1/Pmax;
 
-  while (delta >= delta_min){
+  while (Pmax >= Pmax_min){
     for (int t=1; t<=steps; t+=internal_steps){
       runge_kutta(y, internal_steps);
     }
 
-    printer(y, f);
+    fprintf(f, "%16.8e ", Pmax);
+    for (int i=0; i<nodes; i++){
+      fprintf(f, "%16.8e ", y[i]);
+    }
+    fprintf(f, "\n");
     
     stability_check(runge_kutta, y, additive_steps, &unstable);
 
     if (unstable == 1)  break;
 
-    delta = delta - delta_step;
+    Pmax = Pmax - Pmax_step;
+    delta = 0.1/Pmax;
   }
 
   ctime += TCPU_TIME - tstart;

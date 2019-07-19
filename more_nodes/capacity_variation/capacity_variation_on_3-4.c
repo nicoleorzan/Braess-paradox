@@ -2,17 +2,17 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "../include/time_computing.h"
-#include "../include/network.h"
-#include "../include/stability_check.h"
-#include "../include/runge_kutta.h"
+#include "../../include/time_computing.h"
+#include "../../include/network.h"
+#include "../../include/stability_check.h"
+#include "../../include/runge_kutta.h"
 
-#define steps 250000
+#define steps 1000000
 #define additive_steps 1000
 #define internal_steps 10
 //#define max_error 10e-10
 
-#define max_capacity 1.70
+#define max_capacity 2.04
 #define deltaK 0.01
 
 
@@ -80,7 +80,7 @@ int main(){
     }
     stability_check(runge_kutta, y, additive_steps, &unstable);
 
-    printer(y, capacity_doc);
+    printer_bis(y, capacity_doc);
 
     if (unstable==1) break;
     weights[5] += deltaK;

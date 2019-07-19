@@ -4,7 +4,7 @@
 #define nodes 2
 #define connections 2
 #define alpha 0.1
-#define Gamma 0
+#define Gamma 0.1
 
 const double P[nodes] = {1, -1.2};
 const int AI[nodes+1] = {0, 1, 2};

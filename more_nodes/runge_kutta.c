@@ -2,12 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-#include "include/time_computing.h"
-#include "include/network.h"
-#include "include/runge_kutta.h"
-#include "include/stability_check.h"
+#include "../include/time_computing.h"
+#include "../include/network.h"
+#include "../include/runge_kutta.h"
+#include "../include/stability_check.h"
 
-#define steps 250000
+#define steps 2500
 #define additive_steps 1000
 #define internal_steps 10
 #define printing_step 10
@@ -15,8 +15,8 @@
 
 int main(){
   delta = 0.1/Pmax;
-  fprintf(stdout, "delta = %16.8e\n", delta);
-  fprintf(stdout, "delta*Pmax = %16.8e\n", delta*Pmax);
+  //fprintf(stdout, "delta = %16.8e\n", delta);
+  //fprintf(stdout, "delta*Pmax = %16.8e\n", delta*Pmax);
   double tstart, tstop, ctime=0;
   struct timespec ts;
   
