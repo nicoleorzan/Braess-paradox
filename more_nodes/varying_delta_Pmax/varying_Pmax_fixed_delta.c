@@ -14,7 +14,7 @@
 
 #define Pmax_max 0.2
 #define Pmax_step 0.01
-#define Pmax_min 0.
+#define Pmax_min -0.01
 #define delta_fixed 1
 
 void print_info(FILE *file){
@@ -58,7 +58,7 @@ int main(){
 
 
   Pmax = Pmax_max;
-  delta = 0.1/Pmax;
+  delta = delta_fixed;
 
   while (Pmax >= Pmax_min){
     for (int t=1; t<=steps; t+=internal_steps){
@@ -76,7 +76,6 @@ int main(){
     if (unstable == 1)  break;
 
     Pmax = Pmax - Pmax_step;
-    delta = 0.1/Pmax;
   }
 
   ctime += TCPU_TIME - tstart;
