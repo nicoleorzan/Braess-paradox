@@ -3,7 +3,8 @@
 #include <string.h>
 #include <stdbool.h>
 #include "../../include/time_computing.h"
-#include "../../include/network.h"
+//#include "../../include/network.h"
+#include "../out.h"
 #include "../../include/stability_check.h"
 #include "../../include/runge_kutta.h"
 
@@ -48,7 +49,6 @@ void printer_tris(double * y, FILE * f){
 
 int main(){
 
-  delta = 0.1/Pmax;
   fprintf(stdout, "delta = %16.8e\n", delta);
   fprintf(stdout, "delta*Pmax = %16.8e\n", delta*Pmax);
   double tstart, tstop, ctime=0;

@@ -21,8 +21,8 @@ void derivs(double *y, double *dydt){
       }
     dydt[i] = y[i+nodes];
     //dydt[i+nodes] = -alpha*y[i+nodes] - Pmax*tanh(delta*y[i]) + P[i] - sum;
-    //dydt[i+nodes] = -alpha*y[i+nodes] - Pmax[i]*tanh(delta[i]*y[i]) + P[i] - sum;
-    dydt[i+nodes] = -alpha*y[i+nodes] - Gamma*y[i] + P[i] - sum;  //old code
+    dydt[i+nodes] = -alpha*y[i+nodes] - Pmax[i]*tanh(delta[i]*y[i]) + P[i] - sum;
+    //dydt[i+nodes] = -alpha*y[i+nodes] - Gamma*y[i] + P[i] - sum;  //old code
     
   }
 }

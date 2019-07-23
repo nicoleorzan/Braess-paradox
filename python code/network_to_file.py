@@ -29,7 +29,7 @@ class Network_to_file:
         
     def PrintOnFile(self):
 
-        with open('out.h', mode='wt', encoding='utf-8') as f:
+        with open('../out2.h', mode='wt', encoding='utf-8') as f:
             print("#ifndef NETWORK \n#define NETWORK\n ", file = f)
             print("#define nodes ", self.nodes, file = f)
             print("#define connections ", self.connections, file = f)
