@@ -3,12 +3,12 @@
 #include <string.h>
 #include <stdbool.h>
 #include "../../include/time_computing.h"
-//#include "../../include/network.h"
-#include "../out.h"
+#include "../../include/network.h"
+//#include "../out.h"
 #include "../../include/stability_check.h"
 #include "../../include/runge_kutta.h"
 
-#define steps 1000000
+#define steps 100000
 #define additive_steps 1000
 #define internal_steps 10
 //#define max_error 10e-10
@@ -49,8 +49,8 @@ void printer_tris(double * y, FILE * f){
 
 int main(){
 
-  fprintf(stdout, "delta = %16.8e\n", delta);
-  fprintf(stdout, "delta*Pmax = %16.8e\n", delta*Pmax);
+  //fprintf(stdout, "delta = %16.8e\n", delta);
+  //fprintf(stdout, "delta*Pmax = %16.8e\n", delta*Pmax);
   double tstart, tstop, ctime=0;
   struct timespec ts;
   
@@ -80,7 +80,7 @@ int main(){
     }
     stability_check(runge_kutta, y, additive_steps, &unstable);
 
-    printer_bis(y, capacity_doc);
+    printer(y, capacity_doc);
 
     if (unstable==1) break;
     weights[5] += deltaK;
