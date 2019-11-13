@@ -14,7 +14,6 @@
 #define internal_steps 10
 #define printing_step 10
 
-
 int main(){
   
   double tstart, tstop, ctime=0;
@@ -57,6 +56,3 @@ int main(){
   
   return 0;
 }
-
-
-

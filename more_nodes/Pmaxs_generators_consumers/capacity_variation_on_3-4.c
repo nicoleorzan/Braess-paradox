@@ -14,7 +14,6 @@
 #define max_capacity 2.04
 #define deltaK 0.01
 
-
 void printer(double * y, FILE * f){
   fprintf(f, "%16.8e", (y[3]-y[4])/M_PI); //diff nodes 4-5
   fprintf(f, "%16.8e", (y[3]-y[7])/M_PI); //diff nodes 4-8
